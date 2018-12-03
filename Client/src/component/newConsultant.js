@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Axios from "axios";
 
-class newConsultant extends Component {
+class NewConsultant extends Component {
   constructor(props) {
     super(props);
     this.initialState = {
@@ -126,4 +126,4 @@ class newConsultant extends Component {
   }
 }
 
-export default newConsultant;
+export default NewConsultant;

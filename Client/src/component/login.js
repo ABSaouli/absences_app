@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import Axios from "axios";
 
-class login extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.initialState = {
@@ -172,4 +172,4 @@ class login extends Component {
   }
 }
 
-export default login;
+export default Login;

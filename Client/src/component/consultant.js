@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 
-class consultant extends Component {
+class Consultant extends Component {
   state = {
     Data: [
       {
@@ -84,4 +84,4 @@ class consultant extends Component {
   }
 }
 
-export default consultant;
+export default Consultant;

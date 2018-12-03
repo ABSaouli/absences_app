@@ -17,7 +17,7 @@ const Navbar = props => {
               <NavLink to="/App">App</NavLink>
             </li>
             <li role="presentation">
-              <NavLink to="/consultant">consultant</NavLink>
+              <NavLink to="/consultant">Consultant</NavLink>
             </li>
             <li role="presentation">
               <NavLink to="/newConsultant">NewConsultant</NavLink>

@@ -2,17 +2,17 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import login from "./component/login";
-import Navbar from "./component/Navbar";
-import consultant from "./component/consultant";
-import newConsultant from "./component/newConsultant";
-import Addabsance from "./component/Addabsance";
+import Login from "./Component/Login";
+import Navbar from "./Component/Navbar";
+import Consultant from "./Component/Consultant";
+import NewConsultant from "./Component/NewConsultant";
+import AddAbsence from "./Component/AddAbsence";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import * as serviceWorker from "./serviceWorker";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
-import rootReducer from "./reducers/rootReducer";
+import rootReducer from "./Reducers/RootReducer";
 
 const store = createStore(rootReducer);
 
@@ -23,10 +23,10 @@ let Routes = () => (
         <Navbar />
         <Switch>
           <Route path="/app" component={App} />
-          <Route path="/login" component={login} />
-          <Route path="/consultant" component={consultant} />
-          <Route path="/Addabsance" component={Addabsance} />
-          <Route path="/newConsultant" component={newConsultant} />
+          <Route path="/Login" component={Login} />
+          <Route path="/Consultant" component={Consultant} />
+          <Route path="/AddAbsence" component={AddAbsence} />
+          <Route path="/newConsultant" component={NewConsultant} />
         </Switch>
       </div>
     </BrowserRouter>
