@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import Absence from "./Absence";
 
-const Consultant = ({ absences }) => (
+const AbsenceList = ({ absences }) => (
   <ul>
     <h3>Tableaux Des Absences Demandées</h3>
     <div>
@@ -27,11 +27,11 @@ const Consultant = ({ absences }) => (
           )}
         </tbody>
       </table>
-      <NavLink className="float-right" to="/addAbsence">
+      <NavLink className="float-right" to="/add-absence">
         Ajouter une Demande
       </NavLink>
     </div>
   </ul>
 );
 
-export default Consultant;
+export default AbsenceList;
