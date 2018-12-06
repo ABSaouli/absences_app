@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { addAbsence } from "../redux/actions/index";
-
+import { Redirect } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
 class AddAbsence extends Component {
@@ -11,7 +11,8 @@ class AddAbsence extends Component {
       DateDebut: "",
       DateFin: "",
       TypeAbsence: "",
-      reponse: ""
+      reponse: "",
+      addDone: false
     };
     this.state = this.initialState;
   }
@@ -35,13 +36,15 @@ class AddAbsence extends Component {
       console.log(absence);
       this.props.addAbsence(absence);
     }
-    this.setState(this.initialState);
+    this.setState({ addDone: true });
   };
 
   render() {
-    const { DateDebut, DateFin, TypeAbsence } = this.state;
+    const { DateDebut, DateFin, TypeAbsence, addDone } = this.state;
 
-    return (
+    return addDone ? (
+      <Redirect to="/absences" />
+    ) : (
       <Fragment>
         <form>
           <ul>
