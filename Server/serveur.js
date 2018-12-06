@@ -1,45 +1,58 @@
 const express = require("express");
-const app = require("./config/expressConfig");
+const App = require("./config/expressConfig");
 const connection = require("./config/mongoosConfig");
 const router = require("./routes/router");
 const passport = require("./config/passportConfig");
 const schemadb = require("./models/Schemadb");
 
-app.use(passport.initialize());
+App.use(passport.initialize());
 
-app.use(passport.session());
+App.use(passport.session());
 
-app.use("/", router);
+App.use("/", router);
 
-app.post(
-  "/login",
-  passport.authenticate("local", {
-    successRedirect: "/consultant",
-    failureRedirect: "/"
-  })
-);
+App.post("/login", function(req, res, next) {
+  passport.authenticate("local", function(err, user, info) {
+    console.log("/login handler", req.body);
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      return res.status(500).json({ error: "User not found." });
+    }
+    req.session.save(err => {
+      if (err) {
+        return next(err);
+      }
+      res.status(200).json(user);
+    });
+  })(req, res, next);
+});
 
-app.post("/consultant", (req, res) => {
+App.post("/consultant", (req, res) => {
   console.log(req);
 });
 
-app.get("/consultant", (req, res) => {
+App.get("/consultant", (req, res) => {
   console.log("ca est la route  get /consultant ");
+  console.log(req.user);
+  const Iduser = req.user._id;
+  let consultant = schemadb.consultant.findById();
 
   res.send("tous vas bien");
 });
 
-app.get("/", (req, res) => {
+App.get("/", (req, res) => {
   console.log("ca est lobjet req de get / ");
 
   res.send("tous vas bien");
 });
 
-app.listen(3001, () => {
+App.listen(3001, () => {
   console.log("je vous écoute sur le port 3001");
 });
 
-// app.set("port", 3000);
+// App.set("port", 3000);
 
 // let user = new schemadb.users({
 //   _id: new mongoose.Types.ObjectId(),

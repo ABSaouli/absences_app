@@ -3,13 +3,13 @@ const session = require("express-session");
 const bodyparser = require("body-parser");
 const cookies = require("cookie-parser");
 
-const app = express();
+const App = express();
 
-app.use(bodyparser.urlencoded({ extended: true }));
+App.use(bodyparser.urlencoded({ extended: true }));
 
-app.use(cookies());
+App.use(cookies());
 
-app.use(
+App.use(
   session({
     secret: "jaja",
     resave: false,
@@ -17,4 +17,4 @@ app.use(
   })
 );
 
-module.exports = app;
+module.exports = App;
