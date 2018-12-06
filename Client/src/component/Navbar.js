@@ -8,22 +8,10 @@ const Navbar = props => {
         <div className="jumbotron text-center">
           <ul className="nav nav-pills mb-3" role="tablist">
             <li role="presentation">
-              <NavLink to="/login">Login</NavLink>
+              <NavLink to="/AddAbsence">AddAbsence</NavLink>
             </li>
             <li role="presentation">
-              <NavLink to="/">LogOut</NavLink>
-            </li>
-            <li role="presentation">
-              <NavLink to="/">Home</NavLink>
-            </li>
-            <li role="presentation">
-              <NavLink to="/App">App</NavLink>
-            </li>
-            <li role="presentation">
-              <NavLink to="/consultant">Consultant</NavLink>
-            </li>
-            <li role="presentation">
-              <NavLink to="/newConsultant">NewConsultant</NavLink>
+              <NavLink to="/Consultant">Consultant</NavLink>
             </li>
           </ul>
         </div>

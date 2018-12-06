@@ -1,17 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./Component/App";
-// import App from "./App";
-import { createStore } from "redux";
 import { Provider } from "react-redux";
-import reducerAbsence from "./redux/reducers/absences";
+import configureStore from "./configureStore";
+import AbsenceApp from "./AbsenceApp";
+import { Route, BrowserRouter } from "react-router-dom";
 
-const store = createStore(reducerAbsence);
+const store = configureStore();
 
-let Routes = () => (
+const rootElement = document.getElementById("root");
+
+ReactDOM.render(
   <Provider store={store}>
-    <App />
-  </Provider>
+    <BrowserRouter>
+      <Route path="/" component={AbsenceApp} />
+    </BrowserRouter>
+  </Provider>,
+  rootElement
 );
-
-ReactDOM.render(<Routes />, document.getElementById("root"));

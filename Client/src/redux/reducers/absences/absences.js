@@ -2,10 +2,10 @@ const absence = (state, action) => {
   switch (action.type) {
     case "ADD_ABSENCE":
       return {
-        id: action.id,
-        DateDebut: action.DateDebut,
-        DateFin: action.DateFin,
-        TypeAbsence: action.TypeAbsence,
+        id: action.absence.id,
+        DateDebut: action.absence.DateDebut,
+        DateFin: action.absence.DateFin,
+        TypeAbsence: action.absence.TypeAbsence,
         completed: false
       };
     case "VALID_ABSENCE":

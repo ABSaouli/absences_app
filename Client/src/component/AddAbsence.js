@@ -1,13 +1,15 @@
 import React, { Component } from "react";
-import Axios from "axios";
+import { connect } from "react-redux";
+import { addAbsence } from "../redux/actions/index";
 
 class AddAbsence extends Component {
   constructor(props) {
     super(props);
     this.initialState = {
-      name: "",
-      surname: "",
-      type: ""
+      DateDebut: "",
+      DateFin: "",
+      TypeAbsence: "",
+      reponse: ""
     };
     this.state = this.initialState;
   }
@@ -21,23 +23,20 @@ class AddAbsence extends Component {
 
   submitForm = () => {
     console.log(this.state);
-    if (this.state.name && this.state.surname) {
-      Axios("/newConsultant", {
-        method: "POST",
-        body: this.state
-      })
-        .then(response => {
-          console.log(response);
-        })
-        .catch(error => {
-          console.log(error);
-        });
+    if (this.state.DateDebut && this.state.DateFin && this.state.TypeAbsence) {
+      const absence = {
+        DateDebut: this.state.DateDebut,
+        DateFin: this.state.DateFin,
+        type: this.state.TypeAbsence,
+        reponse: false
+      };
+      this.props.addAbsence(absence);
     }
     this.setState(this.initialState);
   };
 
   render() {
-    const { name, surname, type } = this.state;
+    const { DateDebut, DateFin, TypeAbsence } = this.state;
 
     return (
       <form>
@@ -47,8 +46,8 @@ class AddAbsence extends Component {
             <input
               type="text"
               className="form-control"
-              name="name"
-              value={name}
+              name="DateDebut"
+              value={DateDebut}
               onChange={this.handleChange}
             />
           </div>
@@ -57,8 +56,8 @@ class AddAbsence extends Component {
             <input
               type="text"
               className="form-control"
-              name="surname"
-              value={surname}
+              name="DateFin"
+              value={DateFin}
               onChange={this.handleChange}
             />
           </div>
@@ -67,8 +66,8 @@ class AddAbsence extends Component {
             <input
               type="text"
               className="form-control"
-              name="type"
-              value={type}
+              name="TypeAbsence"
+              value={TypeAbsence}
               onChange={this.handleChange}
             />
           </div>
@@ -84,4 +83,7 @@ class AddAbsence extends Component {
   }
 }
 
-export default AddAbsence;
+export default connect(
+  null,
+  { addAbsence }
+)(AddAbsence);
