@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
 import Absence from "./Absence";
 
 const AbsenceList = ({ absences }) => (
@@ -34,4 +35,9 @@ const AbsenceList = ({ absences }) => (
   </ul>
 );
 
-export default AbsenceList;
+const mapStateToProps = state => {
+  console.log("The State", JSON.stringify(state));
+  return { absences: state.absences };
+};
+
+export default connect(mapStateToProps)(AbsenceList);

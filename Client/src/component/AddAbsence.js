@@ -1,6 +1,8 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { addAbsence } from "../redux/actions/index";
+
+import { NavLink } from "react-router-dom";
 
 class AddAbsence extends Component {
   constructor(props) {
@@ -27,9 +29,10 @@ class AddAbsence extends Component {
       const absence = {
         DateDebut: this.state.DateDebut,
         DateFin: this.state.DateFin,
-        type: this.state.TypeAbsence,
+        TypeAbsence: this.state.TypeAbsence,
         reponse: false
       };
+      console.log(absence);
       this.props.addAbsence(absence);
     }
     this.setState(this.initialState);
@@ -39,46 +42,57 @@ class AddAbsence extends Component {
     const { DateDebut, DateFin, TypeAbsence } = this.state;
 
     return (
-      <form>
-        <ul>
-          <div className="form-group">
-            <label>Date Début</label>
+      <Fragment>
+        <form>
+          <ul>
+            <div className="form-group">
+              <label>Date Début</label>
+              <input
+                type="date"
+                id="start"
+                min="2018-01-01"
+                max="2018-12-31"
+                className="form-control"
+                name="DateDebut"
+                value={DateDebut}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <label>Date de Fin</label>
+              <input
+                type="date"
+                id="start"
+                min="2018-01-01"
+                max="2018-12-31"
+                className="form-control"
+                name="DateFin"
+                value={DateFin}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <label>Type de congé</label>
+              <input
+                type="text"
+                className="form-control"
+                name="TypeAbsence"
+                value={TypeAbsence}
+                onChange={this.handleChange}
+              />
+            </div>
             <input
-              type="text"
-              className="form-control"
-              name="DateDebut"
-              value={DateDebut}
-              onChange={this.handleChange}
+              type="button"
+              className="btn btn-primary"
+              value="Submit"
+              onClick={this.submitForm}
             />
-          </div>
-          <div className="form-group">
-            <label>Date de Fin</label>
-            <input
-              type="text"
-              className="form-control"
-              name="DateFin"
-              value={DateFin}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="form-group">
-            <label>Type de congé</label>
-            <input
-              type="text"
-              className="form-control"
-              name="TypeAbsence"
-              value={TypeAbsence}
-              onChange={this.handleChange}
-            />
-          </div>
-          <input
-            type="button"
-            className="btn btn-primary"
-            value="Submit"
-            onClick={this.submitForm}
-          />
-        </ul>
-      </form>
+          </ul>
+        </form>
+        <NavLink className="float-right" to="/absences">
+          Absences List
+        </NavLink>
+      </Fragment>
     );
   }
 }

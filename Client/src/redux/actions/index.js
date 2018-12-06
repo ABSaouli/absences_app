@@ -2,8 +2,7 @@ let nextAbsence = 0;
 export const addAbsence = absence => {
   return {
     type: "ADD_ABSENCE",
-    id: (nextAbsence++).toString(),
-    absence: absence
+    absence: { id: nextAbsence++, ...absence }
   };
 };
 

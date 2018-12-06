@@ -11,8 +11,7 @@ import Navbar from "./component/Navbar";
 
 export default function AbsenceApp() {
   return (
-    <div className="todo-app">
-      <Navbar />
+    <div className="absence-app">
       <Router>
         <Switch>
           <Route path="/absences" component={AbsenceList} />

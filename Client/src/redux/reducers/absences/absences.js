@@ -1,6 +1,7 @@
 const absence = (state, action) => {
   switch (action.type) {
-    case "ADD_ABSENCE":
+    case "ADD_ABSENCE": {
+      console.log("HEre iam ", action.absence);
       return {
         id: action.absence.id,
         DateDebut: action.absence.DateDebut,
@@ -8,6 +9,7 @@ const absence = (state, action) => {
         TypeAbsence: action.absence.TypeAbsence,
         completed: false
       };
+    }
     case "VALID_ABSENCE":
       if (state.id !== action.id) {
         return state;
