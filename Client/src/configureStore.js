@@ -1,7 +1,7 @@
 // import { saveState, loadState } from "./localStorage";
 // import throttle from "lodash/throttle";
-import { createStore } from "redux";
-import rootReducer from "./redux/reducers/absences";
+import { createStore, applyMiddleware } from "redux";
+import rootReducer from "./redux/reducers/index";
 
 const configureStore = () => {
   // const persistedState = loadState();
@@ -13,7 +13,7 @@ const configureStore = () => {
   // store.subscribe(
   //   throttle(() => {
   //     saveState({
-  //       todos: store.getState().todos
+  //       absences: store.getState().absences
   //     });
   //   }, 1000)
   // );

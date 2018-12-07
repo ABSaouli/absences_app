@@ -7,7 +7,7 @@ const Navbar = props => {
       <div className="jumbotron text-center">
         <ul className="nav nav-pills mb-3" role="tablist">
           <li role="presentation">
-            <NavLink to="/AddAbsence">AddAbsence</NavLink>
+            <NavLink to="/login">Login</NavLink>
           </li>
         </ul>
       </div>

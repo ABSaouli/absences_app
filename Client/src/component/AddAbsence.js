@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { addAbsence } from "../redux/actions/index";
 import { Redirect } from "react-router-dom";
 import { NavLink } from "react-router-dom";
+import Axios from "axios";
 
 class AddAbsence extends Component {
   constructor(props) {
@@ -35,8 +36,20 @@ class AddAbsence extends Component {
       };
       console.log(absence);
       this.props.addAbsence(absence);
+      Axios.post(
+        "/consultant",
+        `dateDebut=${this.state.DateDebut}&dateFin=${
+          this.state.DateFin
+        }&typeAbsence=${this.state.TypeAbsence}`
+      )
+        .then(response => {
+          console.log("est voila la reponse : ", response);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      this.setState({ addDone: true });
     }
-    this.setState({ addDone: true });
   };
 
   render() {

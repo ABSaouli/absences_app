@@ -5,7 +5,7 @@ const Absence = ({ absence }) => (
     <td>{absence.DateDebut}</td>
     <td>{absence.DateFin}</td>
     <td>{absence.TypeAbsence} </td>
-    <td>{absence.reponse} </td>
+    <td>{absence.reponse ? "👋" : "👌"} </td>
   </tr>
 );
 
