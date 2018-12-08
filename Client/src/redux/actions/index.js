@@ -6,6 +6,13 @@ export const addAbsence = absence => {
   };
 };
 
+export const load_absence = absence => {
+  return {
+    type: "LOAD_ABSENCES",
+    absence
+  };
+};
+
 export const registerUser = user => {
   return {
     type: "REGISTER",

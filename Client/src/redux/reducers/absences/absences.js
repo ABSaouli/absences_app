@@ -35,6 +35,8 @@ const absences = (state = [], action) => {
   switch (action.type) {
     case "ADD_ABSENCE":
       return [...state, absence(undefined, action)];
+    case "LOAD_ABSENCES":
+      return [...state, ...action.absence];
     case "VALID_ABSENCE":
       return state.map(t => absence(t, action));
     case "REFUS_ABSENCE":

@@ -2,9 +2,9 @@ import React from "react";
 
 const Absence = ({ absence }) => (
   <tr>
-    <td>{absence.DateDebut}</td>
-    <td>{absence.DateFin}</td>
-    <td>{absence.TypeAbsence} </td>
+    <td>{absence.dateDebut}</td>
+    <td>{absence.dateFin}</td>
+    <td>{absence.typeAbsence} </td>
     <td>{absence.reponse ? "👋" : "👌"} </td>
   </tr>
 );

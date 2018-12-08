@@ -18,3 +18,10 @@ export const loginFailure = error => {
     error
   };
 };
+
+export const fixed_idConsultan = id => {
+  return {
+    type: "FIXED/ID_CONSULTANT",
+    id
+  };
+};

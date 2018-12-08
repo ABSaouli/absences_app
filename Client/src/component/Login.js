@@ -32,7 +32,6 @@ class Login extends Component {
         `email=${this.state.email}&password=${this.state.password}`
       )
         .then(response => {
-          debugger;
           // dispatch login success action
           this.props.loginSuccess(response.data);
         })

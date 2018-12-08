@@ -31,8 +31,7 @@ class AddAbsence extends Component {
       const absence = {
         DateDebut: this.state.DateDebut,
         DateFin: this.state.DateFin,
-        TypeAbsence: this.state.TypeAbsence,
-        reponse: false
+        TypeAbsence: this.state.TypeAbsence
       };
       console.log(absence);
       this.props.addAbsence(absence);
@@ -40,7 +39,9 @@ class AddAbsence extends Component {
         "/consultant",
         `dateDebut=${this.state.DateDebut}&dateFin=${
           this.state.DateFin
-        }&typeAbsence=${this.state.TypeAbsence}`
+        }&typeAbsence=${this.state.TypeAbsence}&idconsultant=${
+          this.props.idconsultant
+        }`
       )
         .then(response => {
           console.log("est voila la reponse : ", response);
@@ -112,8 +113,11 @@ class AddAbsence extends Component {
     );
   }
 }
+const mapStateToProps = state => {
+  return { idconsultant: state.login.idconsultant };
+};
 
 export default connect(
-  null,
+  mapStateToProps,
   { addAbsence }
 )(AddAbsence);
