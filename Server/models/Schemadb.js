@@ -26,22 +26,22 @@ let consultantSchema = Schema({
   id_user: { type: Schema.Types.ObjectId, ref: "users" }
 });
 
-let absanceSchema = Schema({
+let absenceSchema = Schema({
   dateDebut: Date,
   dateFin: Date,
-  type: String,
+  typeAbsence: String,
   reponse: Boolean,
-  id_consultan: { type: Schema.Types.ObjectId, ref: "consultant" }
+  id_consultant: { type: Schema.Types.ObjectId, ref: "consultant" }
 });
 
 let users = mongoose.model("users", usersSchema);
 let responsable = mongoose.model("responsable", responsableSchema);
 let consultant = mongoose.model("consultant", consultantSchema);
-let absance = mongoose.model("absance", absanceSchema);
+let absence = mongoose.model("absence", absenceSchema);
 
 module.exports = {
   consultant: consultant,
-  absance: absance,
+  absence: absence,
   users: users,
   responsable: responsable
 };
