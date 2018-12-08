@@ -10,7 +10,7 @@ class NewUser extends Component {
       email: "",
       password: "",
       confirmePassword: "",
-      user: ""
+      typeUser: ""
     };
     this.state = this.initialState;
   }
@@ -24,20 +24,23 @@ class NewUser extends Component {
 
   submitForm = () => {
     if (
+      this.state.typeUser &&
       this.state.email &&
       this.state.password &&
       this.state.password === this.state.confirmePassword
     ) {
       Axios.post(
         "/register",
-        `email=${this.state.email}&password=${this.state.password}`
+        `email=${this.state.email}&password=${this.state.password}&typeUser=${
+          this.state.typeUser
+        }`
       )
         .then(res => {
           // dispatch Register ID success action
           this.props.registerUser(res.data);
         })
         .catch(error => {
-          // dispatch login failure action
+          // dispatch register failure action
           console.log(error);
         });
     }
@@ -45,10 +48,16 @@ class NewUser extends Component {
   };
 
   render() {
-    const { email, password, confirmePassword } = this.state;
+    const { email, password, confirmePassword, typeUser } = this.state;
     const isRegist = this.props.isRegist;
+    const isRedirect = this.props.isRedirect;
+
     return isRegist ? (
-      <Redirect to="/add-consultant" />
+      isRedirect ? (
+        <Redirect to="/add-consultant" />
+      ) : (
+        <Redirect to="/add-responsable" />
+      )
     ) : (
       <Fragment>
         <form>
@@ -56,6 +65,17 @@ class NewUser extends Component {
             <div className="container-fluid">
               <div className="h3">New User</div>
               <div className="row">
+                <div className="form-group">
+                  <label htmlFor="email">Responsable/Consultant</label>
+                  <input
+                    type="text"
+                    name="typeUser"
+                    className="form-control"
+                    value={typeUser}
+                    onChange={this.handleChange}
+                    placeholder="select"
+                  />
+                </div>
                 <div className="form-group">
                   <label htmlFor="email">email</label>
                   <input
@@ -96,7 +116,7 @@ class NewUser extends Component {
                     className="btn-primary"
                     onClick={this.submitForm}
                   >
-                    Submit
+                    Submit New User
                   </button>
                 </div>
               </div>
@@ -109,7 +129,10 @@ class NewUser extends Component {
 }
 
 const mapStateToProps = state => {
-  return { isRegist: state.register.isRegist };
+  return {
+    isRegist: state.register.isRegist,
+    isRedirect: state.register.isRedirect
+  };
 };
 
 export default connect(

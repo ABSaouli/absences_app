@@ -9,9 +9,9 @@ class AddAbsence extends Component {
   constructor(props) {
     super(props);
     this.initialState = {
-      DateDebut: "",
-      DateFin: "",
-      TypeAbsence: "",
+      dateDebut: "",
+      dateFin: "",
+      typeAbsence: "",
       reponse: "",
       addDone: false
     };
@@ -27,19 +27,18 @@ class AddAbsence extends Component {
 
   submitForm = () => {
     console.log(this.state);
-    if (this.state.DateDebut && this.state.DateFin && this.state.TypeAbsence) {
+    if (this.state.dateDebut && this.state.dateFin && this.state.typeAbsence) {
       const absence = {
-        DateDebut: this.state.DateDebut,
-        DateFin: this.state.DateFin,
-        TypeAbsence: this.state.TypeAbsence
+        dateDebut: this.state.dateDebut,
+        dateFin: this.state.dateFin,
+        typeAbsence: this.state.typeAbsence
       };
-      console.log(absence);
       this.props.addAbsence(absence);
       Axios.post(
         "/absence",
-        `dateDebut=${this.state.DateDebut}&dateFin=${
-          this.state.DateFin
-        }&typeAbsence=${this.state.TypeAbsence}&idconsultant=${
+        `dateDebut=${this.state.dateDebut}&dateFin=${
+          this.state.dateFin
+        }&typeAbsence=${this.state.typeAbsence}&idconsultant=${
           this.props.idconsultant
         }`
       )
@@ -54,7 +53,7 @@ class AddAbsence extends Component {
   };
 
   render() {
-    const { DateDebut, DateFin, TypeAbsence, addDone } = this.state;
+    const { dateDebut, dateFin, typeAbsence, addDone } = this.state;
 
     return addDone ? (
       <Redirect to="/absences" />
@@ -70,8 +69,8 @@ class AddAbsence extends Component {
                 min="2018-01-01"
                 max="2018-12-31"
                 className="form-control"
-                name="DateDebut"
-                value={DateDebut}
+                name="dateDebut"
+                value={dateDebut}
                 onChange={this.handleChange}
               />
             </div>
@@ -83,8 +82,8 @@ class AddAbsence extends Component {
                 min="2018-01-01"
                 max="2018-12-31"
                 className="form-control"
-                name="DateFin"
-                value={DateFin}
+                name="dateFin"
+                value={dateFin}
                 onChange={this.handleChange}
               />
             </div>
@@ -93,8 +92,8 @@ class AddAbsence extends Component {
               <input
                 type="text"
                 className="form-control"
-                name="TypeAbsence"
-                value={TypeAbsence}
+                name="typeAbsence"
+                value={typeAbsence}
                 onChange={this.handleChange}
               />
             </div>

@@ -1,6 +1,6 @@
-export const registerUser = id => {
+export const registerUser = user => {
   return {
     type: "REGISTER_USER",
-    id
+    user
   };
 };

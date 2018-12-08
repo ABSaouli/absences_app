@@ -6,6 +6,7 @@ import AddConsultant from "./component/AddConsultant";
 import NewUser from "./component/NewUser";
 import Navbar from "./component/Navbar";
 import Login from "./component/Login";
+import AddResponsable from "./component/AddResponsable";
 
 export default function AbsenceApp() {
   return (
@@ -16,6 +17,7 @@ export default function AbsenceApp() {
           <Route exact path="/login" component={Login} />
           <Route exact path="/new-user" component={NewUser} />
           <Route exact path="/add-consultant" component={AddConsultant} />
+          <Route exact path="/add-responsable" component={AddResponsable} />
           <Route exact path="/absences" component={AbsenceList} />
           <Route path="/add-absence" component={AddAbsence} />
         </Switch>

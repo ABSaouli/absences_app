@@ -4,7 +4,7 @@ import Axios from "axios";
 import { connect } from "react-redux";
 import { loginSuccess, loginFailure } from "../redux/actions/login";
 
-class AddConsultant extends Component {
+class AddResponsable extends Component {
   constructor(props) {
     super(props);
     this.initialState = {
@@ -31,7 +31,7 @@ class AddConsultant extends Component {
       this.state.age
     ) {
       Axios.post(
-        "/consultant",
+        "/responsable",
         `name=${this.state.name}&surname=${this.state.surname}&mail=${
           this.state.mail
         }&age=${this.state.age}&idUser=${this.props.idUser}`
@@ -56,7 +56,7 @@ class AddConsultant extends Component {
         <form>
           <ul>
             <div className="container-fluid">
-              <div className="h3">Add Consultant</div>
+              <div className="h3">Add Responsable</div>
               <div className="row">
                 <div className="form-group">
                   <label htmlFor="username">name</label>
@@ -129,4 +129,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { loginSuccess, loginFailure }
-)(AddConsultant);
+)(AddResponsable);
