@@ -13,13 +13,6 @@ export const load_absence = absence => {
   };
 };
 
-export const registerUser = user => {
-  return {
-    type: "REGISTER",
-    user
-  };
-};
-
 export const validAbsence = id => {
   return {
     type: "VALID_ABSENCE",

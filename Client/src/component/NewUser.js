@@ -1,18 +1,15 @@
 import React, { Component, Fragment } from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import {
-  performLogin,
-  loginSuccess,
-  loginFailure
-} from "../redux/actions/login";
+import { registerUser } from "../redux/actions/register";
 import Axios from "axios";
-class Login extends Component {
+class NewUser extends Component {
   constructor(props) {
     super(props);
     this.initialState = {
       email: "",
       password: "",
+      confirmePassword: "",
       user: ""
     };
     this.state = this.initialState;
@@ -26,18 +23,21 @@ class Login extends Component {
   };
 
   submitForm = () => {
-    if (this.state.email && this.state.password) {
+    if (
+      this.state.email &&
+      this.state.password &&
+      this.state.password === this.state.confirmePassword
+    ) {
       Axios.post(
-        "/login",
+        "/register",
         `email=${this.state.email}&password=${this.state.password}`
       )
-        .then(response => {
-          // dispatch login success action
-          this.props.loginSuccess(response.data);
+        .then(res => {
+          // dispatch Register ID success action
+          this.props.registerUser(res.data);
         })
         .catch(error => {
           // dispatch login failure action
-          this.props.loginFailure(error);
           console.log(error);
         });
     }
@@ -45,19 +45,19 @@ class Login extends Component {
   };
 
   render() {
-    const { email, password } = this.state;
-    const islogin = this.props.isLogin;
-    return islogin ? (
-      <Redirect to="/absences" />
+    const { email, password, confirmePassword } = this.state;
+    const isRegist = this.props.isRegist;
+    return isRegist ? (
+      <Redirect to="/add-consultant" />
     ) : (
       <Fragment>
         <form>
           <ul>
             <div className="container-fluid">
-              <div className="h3">Login</div>
+              <div className="h3">New User</div>
               <div className="row">
                 <div className="form-group">
-                  <label htmlFor="email">Email</label>
+                  <label htmlFor="email">email</label>
                   <input
                     type="text"
                     name="email"
@@ -79,13 +79,24 @@ class Login extends Component {
                     placeholder="Password"
                   />
                 </div>
+                <div className="form-group">
+                  <label htmlFor="password">Confirme Password</label>
+                  <input
+                    type="password"
+                    name="confirmePassword"
+                    className="form-control"
+                    value={confirmePassword}
+                    onChange={this.handleChange}
+                    placeholder="Password"
+                  />
+                </div>
                 <div>
                   <button
                     type="button"
                     className="btn-primary"
                     onClick={this.submitForm}
                   >
-                    Login
+                    Submit
                   </button>
                 </div>
               </div>
@@ -98,10 +109,10 @@ class Login extends Component {
 }
 
 const mapStateToProps = state => {
-  return { isLogin: state.login.isLogin };
+  return { isRegist: state.register.isRegist };
 };
 
 export default connect(
   mapStateToProps,
-  { performLogin, loginSuccess, loginFailure }
-)(Login);
+  { registerUser }
+)(NewUser);

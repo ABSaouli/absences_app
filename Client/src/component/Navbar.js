@@ -9,6 +9,12 @@ const Navbar = props => {
           <li role="presentation">
             <NavLink to="/login">Login</NavLink>
           </li>
+          <li role="presentation">
+            <NavLink to="/add-consultant">New Consultant</NavLink>
+          </li>
+          <li role="presentation">
+            <NavLink to="/new-user">New User</NavLink>
+          </li>
         </ul>
       </div>
     </div>

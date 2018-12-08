@@ -36,7 +36,7 @@ class AddAbsence extends Component {
       console.log(absence);
       this.props.addAbsence(absence);
       Axios.post(
-        "/consultant",
+        "/absence",
         `dateDebut=${this.state.DateDebut}&dateFin=${
           this.state.DateFin
         }&typeAbsence=${this.state.TypeAbsence}&idconsultant=${
