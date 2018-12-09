@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { registerUser } from "../redux/actions/register";
+import { registerIdUser } from "../redux/actions/register";
 import Axios from "axios";
 class NewUser extends Component {
   constructor(props) {
@@ -37,7 +37,7 @@ class NewUser extends Component {
       )
         .then(res => {
           // dispatch Register ID success action
-          this.props.registerUser(res.data);
+          this.props.registerIdUser(res.data);
         })
         .catch(error => {
           // dispatch register failure action
@@ -137,5 +137,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { registerUser }
+  { registerIdUser }
 )(NewUser);

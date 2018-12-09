@@ -7,6 +7,8 @@ const login = (
       return { isLogin: true, idUser: action.user._id };
     case "LOGIN/FAILURE":
       return { isLogin: false, idUser: "" };
+    case "LOG-OUT":
+      return { isLogin: false, idUser: "", idconsultant: "" };
     case "FIXED/ID_CONSULTANT":
       return { ...state, idconsultant: action.id };
     default:

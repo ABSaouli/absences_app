@@ -1,10 +1,3 @@
-export const performLogin = user => {
-  return {
-    type: "PERFORM_LOGIN",
-    user
-  };
-};
-
 export const loginSuccess = user => {
   return {
     type: "LOGIN/SUCCESS",
@@ -16,6 +9,12 @@ export const loginFailure = error => {
   return {
     type: "LOGIN/FAILURE",
     error
+  };
+};
+
+export const LogOut = () => {
+  return {
+    type: "LOG-OUT"
   };
 };
 

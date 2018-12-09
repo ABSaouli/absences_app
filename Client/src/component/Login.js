@@ -1,11 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import {
-  performLogin,
-  loginSuccess,
-  loginFailure
-} from "../redux/actions/login";
+import { loginSuccess, loginFailure } from "../redux/actions/login";
+import { registerUser } from "../redux/actions/register";
 import Axios from "axios";
 class Login extends Component {
   constructor(props) {
@@ -26,12 +23,15 @@ class Login extends Component {
 
   submitForm = () => {
     if (this.state.email && this.state.password) {
+      //authentication of user
       Axios.post(
         "/login",
         `email=${this.state.email}&password=${this.state.password}`
       )
         .then(response => {
           // dispatch login success action
+
+          this.props.registerUser(response.data);
           this.props.loginSuccess(response.data);
         })
         .catch(error => {
@@ -45,9 +45,16 @@ class Login extends Component {
 
   render() {
     const { email, password } = this.state;
+    //Redirect of login success and login failure
     const islogin = this.props.isLogin;
+    //Redirect of user consultant and user responsable
+    const isRedirect = this.props.isRedirect;
     return islogin ? (
-      <Redirect to="/absences" />
+      isRedirect ? (
+        <Redirect to="/absences" />
+      ) : (
+        <Redirect to="/valid-absences" />
+      )
     ) : (
       <Fragment>
         <form>
@@ -66,7 +73,6 @@ class Login extends Component {
                     placeholder="email"
                   />
                 </div>
-
                 <div className="form-group">
                   <label htmlFor="password">Password</label>
                   <input
@@ -97,10 +103,13 @@ class Login extends Component {
 }
 
 const mapStateToProps = state => {
-  return { isLogin: state.login.isLogin };
+  return {
+    isLogin: state.login.isLogin,
+    isRedirect: state.register.isRedirect
+  };
 };
 
 export default connect(
   mapStateToProps,
-  { performLogin, loginSuccess, loginFailure }
+  { loginSuccess, loginFailure, registerUser }
 )(Login);

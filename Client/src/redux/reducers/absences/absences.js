@@ -7,24 +7,26 @@ const absence = (state, action) => {
         DateDebut: action.absence.DateDebut,
         DateFin: action.absence.DateFin,
         TypeAbsence: action.absence.TypeAbsence,
-        completed: false
+        reponse: false
       };
     }
     case "VALID_ABSENCE":
-      if (state.id !== action.id) {
+      if (state._id !== action.id) {
         return state;
       }
       return {
         ...state,
-        completed: !state.completed
+        reponse: !state.reponse
       };
     case "REFUS_ABSENCE":
-      if (state.id !== action.id) {
+      if (state._id !== action.id) {
+        console.log("je suis la j'ai %%%%%% id%%: ", state);
+
         return state;
       }
       return {
         ...state,
-        completed: null
+        reponse: null
       };
     default:
       return state;
