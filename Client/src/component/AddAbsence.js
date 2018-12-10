@@ -62,7 +62,7 @@ class AddAbsence extends Component {
         <form>
           <ul>
             <div className="form-group">
-              <label>Date Début</label>
+              <label>Start date</label>
               <input
                 type="date"
                 id="start"
@@ -75,7 +75,7 @@ class AddAbsence extends Component {
               />
             </div>
             <div className="form-group">
-              <label>Date de Fin</label>
+              <label>End Date</label>
               <input
                 type="date"
                 id="start"
@@ -88,7 +88,7 @@ class AddAbsence extends Component {
               />
             </div>
             <div className="form-group">
-              <label>Type de congé</label>
+              <label>Type of leave</label>
               <input
                 type="text"
                 className="form-control"

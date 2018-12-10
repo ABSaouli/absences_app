@@ -77,7 +77,7 @@ class NewUser extends Component {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="email">email</label>
+                  <label htmlFor="email">mail</label>
                   <input
                     type="text"
                     name="email"

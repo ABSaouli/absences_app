@@ -10,7 +10,7 @@ class AbsenceList extends React.Component {
   componentDidMount() {
     Axios.get(`/consultant?ID=${this.props.idUser}`).then(res => {
       const idConsultant = res.data._id;
-      this.props.fixed_idConsultan(idConsultant);
+      this.props.fixed_idConsultan(res.data);
       Axios.get(`/absences?ID=${idConsultant}`).then(res => {
         console.log("les absences %%%%%%%%", res);
         const absence = res.data;
@@ -22,18 +22,20 @@ class AbsenceList extends React.Component {
   }
 
   render() {
-    const { absences } = this.props;
+    const { absences, user } = this.props;
     return (
       <ul>
-        <h3>Tableaux Des Absences Demandées</h3>
+        <h4>Consultant Profile : {user}</h4>
+        <h3>Requested Absence Tables </h3>
         <div>
           <table className="table">
             <thead>
               <tr>
-                <th scope="col">Date de Début</th>
-                <th scope="col">Date de Fin</th>
-                <th scope="col">Type de congé</th>
-                <th scope="col">Réponse</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
+                <th scope="col">Type of leave</th>
+                <th scope="col">Answer</th>
+                <th scope="col">Cancel</th>
               </tr>
             </thead>
             <tbody>
@@ -49,7 +51,7 @@ class AbsenceList extends React.Component {
             </tbody>
           </table>
           <NavLink className="float-right" to="/add-absence">
-            Ajouter une Demande
+            Add a Request
           </NavLink>
         </div>
       </ul>
@@ -58,7 +60,11 @@ class AbsenceList extends React.Component {
 }
 const mapStateToProps = state => {
   console.log("The State", JSON.stringify(state));
-  return { absences: state.absences, idUser: state.login.idUser };
+  return {
+    absences: state.absences,
+    idUser: state.login.idUser,
+    user: state.login.user
+  };
 };
 
 export default connect(

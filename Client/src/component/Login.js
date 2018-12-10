@@ -63,7 +63,7 @@ class Login extends Component {
               <div className="h3">Login</div>
               <div className="row">
                 <div className="form-group">
-                  <label htmlFor="email">Email</label>
+                  <label htmlFor="email">mail</label>
                   <input
                     type="text"
                     name="email"

@@ -1,8 +1,9 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
 import ValidAbsence from "./ValidAbsence";
 import { load_absence } from "../redux/actions/index";
+import { getConsultants } from "../redux/actions/consultant";
 import { fixed_idConsultan } from "../redux/actions/login";
 import { registerIdUser } from "../redux/actions/register";
 import Axios from "axios";
@@ -10,14 +11,10 @@ import Axios from "axios";
 class ValidAbsenceList extends React.Component {
   componentDidMount() {
     Axios.get(`/responsable?ID=${this.props.idUser}`).then(res => {
-      const idConsultant = res.data._id;
-      this.props.fixed_idConsultan(idConsultant);
+      this.props.fixed_idConsultan(res.data);
       //this.props.registerIdUser(res.data);
       Axios.get("/all-absences").then(res => {
-        console.log("les absences %%%%%%%%", res);
         const absence = res.data;
-        console.log("voila mon da ta ", absence);
-
         this.props.load_absence(absence);
       });
     });
@@ -30,20 +27,21 @@ class ValidAbsenceList extends React.Component {
   }
 
   render() {
-    const { absences } = this.props;
+    const { absences, user } = this.props;
     // const { user } = this.props;
     return (
       <ul>
+        <h4>Profil de Responsable : {user}</h4>
         <h3>Demandes de congé a valider </h3>
         <div>
           <table className="table">
             <thead>
               <tr>
-                <th scope="col">Date de Début</th>
-                <th scope="col">Date de Fin</th>
-                <th scope="col">Type de congé</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
+                <th scope="col">Type of leave</th>
                 <th scope="col">Validation </th>
-                <th scope="col">Réponse</th>
+                <th scope="col">Answer</th>
               </tr>
             </thead>
             <tbody>
@@ -58,8 +56,12 @@ class ValidAbsenceList extends React.Component {
               )}
             </tbody>
           </table>
-          <NavLink className="float-right" to="/add-absence">
-            Ajouter une Demande
+          <NavLink
+            className="float-right"
+            to="/consultant-list"
+            onClick={this.props.getConsultants}
+          >
+            Consultant-List
           </NavLink>
         </div>
       </ul>
@@ -70,11 +72,11 @@ const mapStateToProps = state => {
   return {
     absences: state.absences,
     idUser: state.login.idUser,
-    user: state.register.user
+    user: state.login.user
   };
 };
 
 export default connect(
   mapStateToProps,
-  { load_absence, fixed_idConsultan, registerIdUser }
+  { load_absence, fixed_idConsultan, registerIdUser, getConsultants }
 )(ValidAbsenceList);

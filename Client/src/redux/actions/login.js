@@ -18,9 +18,9 @@ export const LogOut = () => {
   };
 };
 
-export const fixed_idConsultan = id => {
+export const fixed_idConsultan = user => {
   return {
     type: "FIXED/ID_CONSULTANT",
-    id
+    user
   };
 };

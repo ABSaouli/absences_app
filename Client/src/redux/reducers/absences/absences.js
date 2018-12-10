@@ -20,8 +20,6 @@ const absence = (state, action) => {
       };
     case "REFUS_ABSENCE":
       if (state._id !== action.id) {
-        console.log("je suis la j'ai %%%%%% id%%: ", state);
-
         return state;
       }
       return {
@@ -43,6 +41,8 @@ const absences = (state = [], action) => {
       return state.map(t => absence(t, action));
     case "REFUS_ABSENCE":
       return state.map(t => absence(t, action));
+    case "DELETE_ABSENCE":
+      return state.filter(absence => absence._id !== action.id);
     default:
       return state;
   }

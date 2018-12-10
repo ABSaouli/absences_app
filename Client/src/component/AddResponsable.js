@@ -56,7 +56,7 @@ class AddResponsable extends Component {
         <form>
           <ul>
             <div className="container-fluid">
-              <div className="h3">Add Responsable</div>
+              <div className="h3">Add Responsible</div>
               <div className="row">
                 <div className="form-group">
                   <label htmlFor="username">name</label>
