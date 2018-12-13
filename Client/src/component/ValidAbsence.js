@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { refusAbsence, validAbsence } from "../redux/actions/index";
+import {
+  refusAbsenceRequest,
+  validAbsenceRequest
+} from "../redux/actions/absence";
 
 class ValidAbsence extends Component {
   render() {
@@ -18,13 +21,17 @@ class ValidAbsence extends Component {
         </td>
         <td>
           <button
-            onClick={() => this.props.validAbsence(this.props.absence._id)}
+            onClick={() =>
+              this.props.validAbsenceRequest(this.props.absence._id)
+            }
             className="btn btn-outline-success"
           >
             Accept
           </button>
           <button
-            onClick={() => this.props.refusAbsence(this.props.absence._id)}
+            onClick={() =>
+              this.props.refusAbsenceRequest(this.props.absence._id)
+            }
             className="btn btn-outline-danger"
           >
             Refused
@@ -41,5 +48,5 @@ class ValidAbsence extends Component {
 
 export default connect(
   null,
-  { validAbsence, refusAbsence }
+  { validAbsenceRequest, refusAbsenceRequest }
 )(ValidAbsence);

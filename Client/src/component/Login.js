@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { loginSuccess, loginFailure } from "../redux/actions/login";
-import { registerUser } from "../redux/actions/register";
-import Axios from "axios";
+import { authenticate } from "../redux/actions/login";
+// import { registerUser } from "../redux/actions/register";
+// import Axios from "axios";
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -23,22 +23,10 @@ class Login extends Component {
 
   submitForm = () => {
     if (this.state.email && this.state.password) {
+      // const user = `email=${this.state.email}&password=${this.state.password}`;
       //authentication of user
-      Axios.post(
-        "/login",
-        `email=${this.state.email}&password=${this.state.password}`
-      )
-        .then(response => {
-          // dispatch login success action
-
-          this.props.registerUser(response.data);
-          this.props.loginSuccess(response.data);
-        })
-        .catch(error => {
-          // dispatch login failure action
-          this.props.loginFailure(error);
-          console.log(error);
-        });
+      const user1 = { email: this.state.email, password: this.state.password };
+      this.props.authenticate(user1);
     }
     this.setState(this.initialState);
   };
@@ -111,5 +99,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { loginSuccess, loginFailure, registerUser }
+  { authenticate }
 )(Login);

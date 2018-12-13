@@ -1,8 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { registerIdUser } from "../redux/actions/register";
-import Axios from "axios";
+import { addUserB } from "../redux/actions/login";
 class NewUser extends Component {
   constructor(props) {
     super(props);
@@ -29,20 +28,10 @@ class NewUser extends Component {
       this.state.password &&
       this.state.password === this.state.confirmePassword
     ) {
-      Axios.post(
-        "/register",
-        `email=${this.state.email}&password=${this.state.password}&typeUser=${
-          this.state.typeUser
-        }`
-      )
-        .then(res => {
-          // dispatch Register ID success action
-          this.props.registerIdUser(res.data);
-        })
-        .catch(error => {
-          // dispatch register failure action
-          console.log(error);
-        });
+      const user = `email=${this.state.email}&password=${
+        this.state.password
+      }&typeUser=${this.state.typeUser}`;
+      this.props.addUserB(user);
     }
     this.setState(this.initialState);
   };
@@ -137,5 +126,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { registerIdUser }
+  { addUserB }
 )(NewUser);

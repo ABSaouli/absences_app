@@ -1,4 +1,5 @@
 import axios from "axios";
+import { loginSuccess } from "./login";
 
 export const getConsultantSuccess = consultants => {
   return {
@@ -18,4 +19,16 @@ export const getConsultants = id => {
         throw error;
       });
   };
+};
+
+export const addConsultant = consultant => {
+  return dispatch =>
+    axios
+      .post("/consultant", consultant)
+      .then(response => {
+        dispatch(loginSuccess(response.data));
+      })
+      .catch(error => {
+        console.log("error sur post/consultant ", error);
+      });
 };

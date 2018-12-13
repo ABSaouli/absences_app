@@ -1,8 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Redirect } from "react-router-dom";
-import Axios from "axios";
 import { connect } from "react-redux";
-import { loginSuccess, loginFailure } from "../redux/actions/login";
+import { addConsultant } from "../redux/actions/consultant";
 
 class AddConsultant extends Component {
   constructor(props) {
@@ -30,18 +29,13 @@ class AddConsultant extends Component {
       this.state.mail &&
       this.state.age
     ) {
-      Axios.post(
-        "/consultant",
-        `name=${this.state.name}&surname=${this.state.surname}&mail=${
-          this.state.mail
-        }&age=${this.state.age}&idUser=${this.props.idUser}`
-      )
-        .then(response => {
-          this.props.loginSuccess(response.data);
-        })
-        .catch(error => {
-          console.log("error sur post/consultant ", error);
-        });
+      const consultant = `name=${this.state.name}&surname=${
+        this.state.surname
+      }&mail=${this.state.mail}&age=${this.state.age}&idUser=${
+        this.props.idUser
+      }`;
+
+      this.props.addConsultant(consultant);
     }
     this.setState(this.initialState);
   };
@@ -128,5 +122,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { loginSuccess, loginFailure }
+  { addConsultant }
 )(AddConsultant);

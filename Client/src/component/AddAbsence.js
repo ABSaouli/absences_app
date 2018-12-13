@@ -1,9 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { addAbsence } from "../redux/actions/index";
+import { addAbsence } from "../redux/actions/absence";
 import { Redirect } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-import Axios from "axios";
 
 class AddAbsence extends Component {
   constructor(props) {
@@ -28,26 +27,13 @@ class AddAbsence extends Component {
   submitForm = () => {
     console.log(this.state);
     if (this.state.dateDebut && this.state.dateFin && this.state.typeAbsence) {
-      const absence = {
-        dateDebut: this.state.dateDebut,
-        dateFin: this.state.dateFin,
-        typeAbsence: this.state.typeAbsence
-      };
+      const absence = `dateDebut=${this.state.dateDebut}&dateFin=${
+        this.state.dateFin
+      }&typeAbsence=${this.state.typeAbsence}&idconsultant=${
+        this.props.idconsultant
+      }`;
+
       this.props.addAbsence(absence);
-      Axios.post(
-        "/absence",
-        `dateDebut=${this.state.dateDebut}&dateFin=${
-          this.state.dateFin
-        }&typeAbsence=${this.state.typeAbsence}&idconsultant=${
-          this.props.idconsultant
-        }`
-      )
-        .then(response => {
-          console.log("est voila la reponse : ", response);
-        })
-        .catch(error => {
-          console.log(error);
-        });
       this.setState({ addDone: true });
     }
   };

@@ -2,23 +2,12 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import Absence from "./Absence";
-import { load_absence } from "../redux/actions/index";
-import { fixed_idConsultan } from "../redux/actions/login";
-import Axios from "axios";
+import { getIdConsultant } from "../redux/actions/absence";
 
 class AbsenceList extends React.Component {
   componentDidMount() {
-    Axios.get(`/consultant?ID=${this.props.idUser}`).then(res => {
-      const idConsultant = res.data._id;
-      this.props.fixed_idConsultan(res.data);
-      Axios.get(`/absences?ID=${idConsultant}`).then(res => {
-        console.log("les absences %%%%%%%%", res);
-        const absence = res.data;
-        console.log("voila mon da ta ", absence);
-
-        this.props.load_absence(absence);
-      });
-    });
+    const idUser = this.props.idUser;
+    this.props.getIdConsultant(idUser);
   }
 
   render() {
@@ -69,5 +58,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { load_absence, fixed_idConsultan }
+  { getIdConsultant }
 )(AbsenceList);

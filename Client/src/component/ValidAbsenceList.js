@@ -2,28 +2,13 @@ import React from "react";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import ValidAbsence from "./ValidAbsence";
-import { load_absence } from "../redux/actions/index";
+import { getIdResponsable } from "../redux/actions/absence";
 import { getConsultants } from "../redux/actions/consultant";
-import { fixed_idConsultan } from "../redux/actions/login";
-import { registerIdUser } from "../redux/actions/register";
-import Axios from "axios";
 
 class ValidAbsenceList extends React.Component {
   componentDidMount() {
-    Axios.get(`/responsable?ID=${this.props.idUser}`).then(res => {
-      this.props.fixed_idConsultan(res.data);
-      //this.props.registerIdUser(res.data);
-      Axios.get("/all-absences").then(res => {
-        const absence = res.data;
-        this.props.load_absence(absence);
-      });
-    });
-  }
-
-  componentDidUpdate() {
-    this.handleValidSubmit = id => {
-      console.log("%%%% id %%%", id);
-    };
+    const idUser = this.props.idUser;
+    this.props.getIdResponsable(idUser);
   }
 
   render() {
@@ -78,5 +63,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { load_absence, fixed_idConsultan, registerIdUser, getConsultants }
+  { getIdResponsable, getConsultants }
 )(ValidAbsenceList);

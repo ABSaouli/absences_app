@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { deleteAbsence } from "../redux/actions/index";
+import { deleteAbsence } from "../redux/actions/absence";
 
 class Absence extends Component {
   render() {
