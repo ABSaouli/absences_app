@@ -1,5 +1,12 @@
 import axios from "axios";
 
+export const getEstimationConge = idConsultant => {
+  return {
+    type: "ESTIMATIOS_CONGE",
+    idConsultant
+  };
+};
+
 export const validAbsenceRequest = id => {
   return {
     type: "VALID_ABSENCE_REQUEST",
@@ -13,19 +20,6 @@ export const refusAbsenceRequest = id => {
     id
   };
 };
-
-// export const refusAbsence = id => {
-//   return dispatch => {
-//     return axios
-//       .get(`/absences/refus?ID=${id}`)
-//       .then(res => {
-//         dispatch(refusAbsenceSuccess(res.data));
-//       })
-//       .catch(error => {
-//         throw error;
-//       });
-//   };
-// };
 
 export const deleteAbsenceSuccess = id => {
   return {
@@ -73,15 +67,9 @@ export const getIdResponsable = id => {
 };
 
 export const addAbsence = data => {
-  return dispatch => {
-    return axios
-      .post("/absence", data)
-      .then(res => {
-        dispatch(addAbsenceSuccess(res.data));
-      })
-      .catch(error => {
-        console.log(error);
-      });
+  return {
+    type: "ADD_ABSENCE_REQUEST",
+    data
   };
 };
 

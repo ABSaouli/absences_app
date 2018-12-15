@@ -53,7 +53,7 @@ export const LogOut = () => {
 
 export const addUserB = data => {
   return dispatch => {
-    axios.post("register", data).then(res => {
+    axios.post("/register", data).then(res => {
       dispatch(registerIdUser(res.data));
     });
   };

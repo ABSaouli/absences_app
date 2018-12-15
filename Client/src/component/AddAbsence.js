@@ -33,6 +33,13 @@ class AddAbsence extends Component {
         this.props.idconsultant
       }`;
 
+      // const absence = {
+      //   dateDebut: this.state.dateDebut,
+      //   dateFin: this.state.dateFin,
+      //   typeAbsence: this.props.typeAbsence,
+      //   idconsultant: this.props.idconsultant
+      // };
+
       this.props.addAbsence(absence);
       this.setState({ addDone: true });
     }

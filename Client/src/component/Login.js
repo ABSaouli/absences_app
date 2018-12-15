@@ -26,6 +26,7 @@ class Login extends Component {
       // const user = `email=${this.state.email}&password=${this.state.password}`;
       //authentication of user
       const user1 = { email: this.state.email, password: this.state.password };
+
       this.props.authenticate(user1);
     }
     this.setState(this.initialState);
@@ -39,8 +40,11 @@ class Login extends Component {
     const isRedirect = this.props.isRedirect;
     return islogin ? (
       isRedirect ? (
+        // redirect vers Consultant
+
         <Redirect to="/absences" />
       ) : (
+        // redirect vers Responsable
         <Redirect to="/valid-absences" />
       )
     ) : (

@@ -1,7 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
-import { getConsultants } from "../redux/actions/consultant";
 
 class AbsenceList extends React.Component {
   render() {
@@ -56,7 +55,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  { getConsultants }
-)(AbsenceList);
+export default connect(mapStateToProps)(AbsenceList);
