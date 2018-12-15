@@ -20,12 +20,21 @@ const register = (
         };
       }
     case "REGISTER_ID_USER":
-      return {
-        isRegist: true,
-        idUser: action.user._id,
-        user: action.user.name,
-        isRedirect: true
-      };
+      if (action.user.typeUser === "Consultant") {
+        return {
+          isRegist: true,
+          idUser: action.user._id,
+          user: action.user.name,
+          isRedirect: true
+        };
+      } else {
+        return {
+          isRegist: true,
+          idUser: action.user._id,
+          user: action.user.name,
+          isRedirect: false
+        };
+      }
     default:
       return state;
   }

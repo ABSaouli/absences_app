@@ -29,10 +29,9 @@ class ValidAbsenceList extends React.Component {
             </div>
           </Fragment>
         ) : (
-          ""
+          <h4>Profil de Responsable : {user}</h4>
         )}
         <Fragment>
-          <h4>Profil de Responsable : {user}</h4>
           <h3>Demandes de congé a valider </h3>
           <div>
             <table className="table">

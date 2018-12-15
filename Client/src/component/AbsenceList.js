@@ -28,10 +28,9 @@ class AbsenceList extends React.Component {
             </div>
           </Fragment>
         ) : (
-          ""
+          <h4>Consultant Profile : {user}</h4>
         )}
         <Fragment>
-          <h4>Consultant Profile : {user}</h4>
           <h3>Requested Absence Tables </h3>
           <h5>
             Absence Estimates :
