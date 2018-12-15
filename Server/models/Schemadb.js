@@ -4,7 +4,8 @@ let Schema = mongoose.Schema;
 let usersSchema = Schema({
   _id: Schema.Types.ObjectId,
   mail: String,
-  password: String
+  password: String,
+  typeUser: String
 });
 
 let responsableSchema = Schema({
@@ -22,13 +23,14 @@ let consultantSchema = Schema({
   surname: String,
   mail: String,
   age: Number,
+  nbJours: Number,
   dateDebutContart: Date,
   id_user: { type: Schema.Types.ObjectId, ref: "users" }
 });
 
 let absenceSchema = Schema({
-  dateDebut: Date,
-  dateFin: Date,
+  dateDebut: String,
+  dateFin: String,
   typeAbsence: String,
   reponse: Boolean,
   id_consultant: { type: Schema.Types.ObjectId, ref: "consultant" }
