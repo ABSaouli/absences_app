@@ -24,16 +24,16 @@ export const EstimationAbsencesSuccess = data => {
 };
 
 export function* authenticateRequest(action) {
-  const res = yield call(axios, {
-    url: "/login",
-    method: "post",
-    params: action.user
-  });
-  if (res.status === 200) {
+  try {
+    const res = yield call(axios, {
+      url: "/login",
+      method: "post",
+      params: action.user
+    });
     yield put(registerUser(res.data));
     yield put(loginSuccess(res.data));
-  } else {
-    yield put(loginFailure(res.data));
+  } catch (error) {
+    yield put(loginFailure(error));
   }
 }
 
@@ -41,6 +41,10 @@ export function* addAbsenceRequest(action) {
   yield call(axios.post, "/absence", action.data, {
     headers: { "Content-Type": "application/x-www-form-urlencoded" }
   });
+}
+
+export function* addProjectRequest(action) {
+  yield call(axios.post, "/add-project", action.project);
 }
 
 export function* EstimationAbsences(action) {
@@ -66,4 +70,5 @@ export default function* rootSaga() {
   yield takeEvery("LOGIN_REQUEST", authenticateRequest);
   yield takeEvery("ADD_ABSENCE_REQUEST", addAbsenceRequest);
   yield takeEvery("ESTIMATIOS_CONGE", EstimationAbsences);
+  yield takeEvery("ADD_PROJECT_REQUEST", addProjectRequest);
 }

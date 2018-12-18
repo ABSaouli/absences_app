@@ -35,7 +35,7 @@ class AbsenceList extends React.Component {
                 })
               ) : (
                 <tr>
-                  <td colSpan={4}>No users</td>
+                  <td colSpan={4}>No Consultants</td>
                 </tr>
               )}
             </tbody>

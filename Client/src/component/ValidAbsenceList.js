@@ -63,6 +63,14 @@ class ValidAbsenceList extends React.Component {
             >
               Consultant-List
             </NavLink>
+            <br />
+            <NavLink
+              className="float-right"
+              to="/add-project"
+              onClick={this.props.getConsultants}
+            >
+              New-Project
+            </NavLink>
           </div>
         </Fragment>
       </ul>

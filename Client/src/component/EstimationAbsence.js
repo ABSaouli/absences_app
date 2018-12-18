@@ -12,7 +12,7 @@ class AbsenceList extends React.Component {
         {estimation.total < -10 ? (
           <Fragment>
             <div class="alert alert-warning" role="alert">
-              Warning alert - Total absences lower than 10 !
+              Warning alert - Total absences lower than -10 !
             </div>
           </Fragment>
         ) : (
