@@ -23,6 +23,20 @@ export const EstimationAbsencesSuccess = data => {
   };
 };
 
+export const getProjectSuccess = data => {
+  return {
+    type: "GET_PROJECT_SUCCESS",
+    data
+  };
+};
+
+export const getConsultantOfProjectSuccess = data => {
+  return {
+    type: "GET_CONSULTANT_OF_PROJECT_SUCCESS",
+    data
+  };
+};
+
 export function* authenticateRequest(action) {
   try {
     const res = yield call(axios, {
@@ -38,13 +52,16 @@ export function* authenticateRequest(action) {
 }
 
 export function* addAbsenceRequest(action) {
-  yield call(axios.post, "/absence", action.data, {
-    headers: { "Content-Type": "application/x-www-form-urlencoded" }
-  });
+  yield call(axios.post, "/absence", action.data);
 }
 
 export function* addProjectRequest(action) {
-  yield call(axios.post, "/add-project", action.project);
+  yield call(axios.post, "/project", action.project);
+}
+
+export function* getProjectRequest() {
+  const res = yield call(axios.get, "/project");
+  yield put(getProjectSuccess(res.data));
 }
 
 export function* EstimationAbsences(action) {
@@ -56,12 +73,17 @@ export function* EstimationAbsences(action) {
 }
 
 export function* validOneAbsence(action) {
-  const id = yield call(axios.get, `/absences/valid?ID=${action.id}`);
+  const id = yield call(axios.get, `/absences/valid?_id=${action.id}`);
   yield put(validAbsenceSuccess(id.data));
 }
 export function* refusOneAbsence(action) {
-  const id = yield call(axios.get, `/absences/refus?ID=${action.id}`);
+  const id = yield call(axios.get, `/absences/refus?_id=${action.id}`);
   yield put(refusAbsenceSuccess(id.data));
+}
+
+export function* getConsultantOfProjectRequest(action) {
+  const res = yield call(axios.get, `/consultant/${action.id}`);
+  yield put(getConsultantOfProjectSuccess(res.data));
 }
 
 export default function* rootSaga() {
@@ -71,4 +93,6 @@ export default function* rootSaga() {
   yield takeEvery("ADD_ABSENCE_REQUEST", addAbsenceRequest);
   yield takeEvery("ESTIMATIOS_CONGE", EstimationAbsences);
   yield takeEvery("ADD_PROJECT_REQUEST", addProjectRequest);
+  yield takeEvery("GET_PROJECT_REQUEST", getProjectRequest);
+  yield takeEvery("GET_CONSULTANT_OF_PROJECT", getConsultantOfProjectRequest);
 }

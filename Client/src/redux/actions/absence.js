@@ -43,10 +43,11 @@ export const deleteAbsence = id => {
 
 export const getIdConsultant = id => {
   return dispatch => {
-    return axios.get(`/consultant?ID=${id}`).then(res => {
-      const idConsultant = res.data._id;
-      dispatch(fixed_idConsultan(res.data));
-      return axios.get(`/absences?ID=${idConsultant}`).then(res => {
+    return axios.get(`/consultant?id_user=${id}`).then(res => {
+      const idConsultant = res.data[0]._id;
+      const user = res.data[0];
+      dispatch(fixed_idConsultan(user));
+      axios.get(`/absences?id_consultant=${idConsultant}`).then(res => {
         const absence = res.data;
         dispatch(load_absence(absence));
       });
@@ -56,9 +57,9 @@ export const getIdConsultant = id => {
 
 export const getIdResponsable = id => {
   return dispatch => {
-    return axios.get(`/responsable?ID=${id}`).then(res => {
+    axios.get(`/responsable?id_user=${id}`).then(res => {
       dispatch(fixed_idConsultan(res.data));
-      return axios.get("/all-absences").then(res => {
+      axios.get("/all-absences").then(res => {
         const absence = res.data;
         dispatch(load_absence(absence));
       });

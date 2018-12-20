@@ -11,7 +11,7 @@ export const getConsultantSuccess = consultants => {
 export const getConsultants = id => {
   return dispatch => {
     return axios
-      .get("/consultant/all")
+      .get("/consultant")
       .then(res => {
         dispatch(getConsultantSuccess(res.data));
       })

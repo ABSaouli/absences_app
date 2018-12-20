@@ -2,8 +2,7 @@ import React, { Component, Fragment } from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { authenticate } from "../redux/actions/login";
-// import { registerUser } from "../redux/actions/register";
-// import Axios from "axios";
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -21,13 +20,25 @@ class Login extends Component {
     });
   };
 
+  prefillConsultant = () => {
+    this.setState({
+      email: "saouli.abdelwahhab@yahoo.fr",
+      password: "000"
+    });
+  };
+  prefillManager = () => {
+    this.setState({
+      email: "belkacem@rebouh.fr",
+      password: "0000"
+    });
+  };
+
   submitForm = () => {
     if (this.state.email && this.state.password) {
-      // const user = `email=${this.state.email}&password=${this.state.password}`;
       //authentication of user
-      const user1 = { email: this.state.email, password: this.state.password };
+      const user = { email: this.state.email, password: this.state.password };
 
-      this.props.authenticate(user1);
+      this.props.authenticate(user);
     }
     this.setState(this.initialState);
   };
@@ -83,6 +94,24 @@ class Login extends Component {
                     onClick={this.submitForm}
                   >
                     Login
+                  </button>
+                </div>
+                <div>
+                  <button
+                    type="button"
+                    className="btn-primary"
+                    onClick={this.prefillManager}
+                  >
+                    Manager
+                  </button>
+                </div>
+                <div>
+                  <button
+                    type="button"
+                    className="btn-primary"
+                    onClick={this.prefillConsultant}
+                  >
+                    Consultant
                   </button>
                 </div>
               </div>

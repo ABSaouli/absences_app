@@ -27,18 +27,19 @@ class AddAbsence extends Component {
   submitForm = () => {
     console.log(this.state);
     if (this.state.dateDebut && this.state.dateFin && this.state.typeAbsence) {
-      const absence = `dateDebut=${this.state.dateDebut}&dateFin=${
-        this.state.dateFin
-      }&typeAbsence=${this.state.typeAbsence}&idconsultant=${
-        this.props.idconsultant
-      }`;
+      // const absence = `dateDebut=${this.state.dateDebut}&dateFin=${
+      //   this.state.dateFin
+      // }&typeAbsence=${this.state.typeAbsence}&idconsultant=${
+      //   this.props.idconsultant
+      // }`;
 
-      // const absence = {
-      //   dateDebut: this.state.dateDebut,
-      //   dateFin: this.state.dateFin,
-      //   typeAbsence: this.props.typeAbsence,
-      //   idconsultant: this.props.idconsultant
-      // };
+      const absence = {
+        dateDebut: this.state.dateDebut,
+        dateFin: this.state.dateFin,
+        typeAbsence: this.state.typeAbsence,
+        reponse: false,
+        id_consultant: this.props.idconsultant
+      };
 
       this.props.addAbsence(absence);
       this.setState({ addDone: true });

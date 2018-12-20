@@ -29,11 +29,13 @@ class AddConsultant extends Component {
       this.state.mail &&
       this.state.age
     ) {
-      const consultant = `name=${this.state.name}&surname=${
-        this.state.surname
-      }&mail=${this.state.mail}&age=${this.state.age}&idUser=${
-        this.props.idUser
-      }`;
+      const consultant = {
+        name: this.state.name,
+        surname: this.state.surname,
+        mail: this.state.mail,
+        age: this.state.age,
+        idUser: this.props.idUser
+      };
 
       this.props.addConsultant(consultant);
     }

@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import ValidAbsence from "./ValidAbsence";
 import { getIdResponsable } from "../redux/actions/absence";
 import { getConsultants } from "../redux/actions/consultant";
+import { getProject } from "../redux/actions/project";
 
 class ValidAbsenceList extends React.Component {
   state = {
@@ -71,6 +72,14 @@ class ValidAbsenceList extends React.Component {
             >
               New-Project
             </NavLink>
+            <br />
+            <NavLink
+              className="float-right"
+              to="/all-project"
+              onClick={this.props.getProject}
+            >
+              List_of_Project
+            </NavLink>
           </div>
         </Fragment>
       </ul>
@@ -87,5 +96,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getIdResponsable, getConsultants }
+  { getIdResponsable, getConsultants, getProject }
 )(ValidAbsenceList);

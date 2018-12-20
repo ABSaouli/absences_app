@@ -22,17 +22,15 @@ class AbsenceList extends React.Component {
             </thead>
             <tbody>
               {consultants && consultants.length > 0 ? (
-                consultants.map(consultant => {
-                  return (
-                    <tr>
-                      <td>{consultant.name}</td>
-                      <td>{consultant.surname}</td>
-                      <td>{consultant.mail} </td>
-                      <td>{consultant.age}</td>
-                      <td>{consultant.dateDebutContart}</td>
-                    </tr>
-                  );
-                })
+                consultants.map(consultant => (
+                  <tr>
+                    <td>{consultant.name}</td>
+                    <td>{consultant.surname}</td>
+                    <td>{consultant.mail} </td>
+                    <td>{consultant.age}</td>
+                    <td>{consultant.dateDebutContart}</td>
+                  </tr>
+                ))
               ) : (
                 <tr>
                   <td colSpan={4}>No Consultants</td>

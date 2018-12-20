@@ -4,9 +4,14 @@ const login = (
 ) => {
   switch (action.type) {
     case "LOGIN/SUCCESS":
-      return { isLogin: true, idUser: action.user._id, user: "" };
+      return {
+        isLogin: true,
+        idUser: action.user._id,
+        idconsultant: "",
+        user: ""
+      };
     case "LOGIN/FAILURE":
-      return { isLogin: false, idUser: "", user: "" };
+      return { isLogin: false, idUser: "", idconsultant: "", user: "" };
     case "LOG-OUT":
       return { isLogin: false, idUser: "", idconsultant: "", user: "" };
     case "FIXED/ID_CONSULTANT":

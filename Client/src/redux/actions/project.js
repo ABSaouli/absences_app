@@ -4,3 +4,16 @@ export const addProject = project => {
     project
   };
 };
+
+export const getProject = () => {
+  return {
+    type: "GET_PROJECT_REQUEST"
+  };
+};
+
+export const getConsultantOfProject = id => {
+  return {
+    type: "GET_CONSULTANT_OF_PROJECT",
+    id
+  };
+};

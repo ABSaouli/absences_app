@@ -11,6 +11,8 @@ import ValidAbsences from "./component/ValidAbsenceList";
 import ConsultantList from "./component/ConsultantList";
 import EstimationAbsence from "./component/EstimationAbsence";
 import AddProjet from "./component/AddProjet";
+import ProjectList from "./component/ProjectList";
+import DetailProject from "./component/DetailProject";
 
 export default function AbsenceApp() {
   return (
@@ -33,6 +35,8 @@ export default function AbsenceApp() {
             component={EstimationAbsence}
           />
           <Route exact path="/add-absence" component={AddAbsence} />
+          <Route exact path="/all-project" component={ProjectList} />
+          <Route exact path="/detail-project/:id" component={DetailProject} />
         </Switch>
       </div>
     </BrowserRouter>

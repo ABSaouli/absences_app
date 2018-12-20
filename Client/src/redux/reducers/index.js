@@ -5,6 +5,7 @@ import register from "./register/register";
 import consultants from "./consultants/consultant";
 import visibilityAbsence from "./absences/visibilityAbsence";
 import Estimation from "./estimationAbsence/estimation";
+import Project from "./project/project";
 
 const absenceReducer = combineReducers({
   register: register,
@@ -12,6 +13,7 @@ const absenceReducer = combineReducers({
   absences: absences,
   consultants: consultants,
   estimation: Estimation,
+  project: Project,
   visibilityAbsence: visibilityAbsence
 });
 
