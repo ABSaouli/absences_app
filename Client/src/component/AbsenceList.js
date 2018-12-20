@@ -68,6 +68,10 @@ class AbsenceList extends React.Component {
             <NavLink className="float-right" to="/add-absence">
               Add a Request
             </NavLink>
+            <br />
+            <NavLink className="float-right" to="/list-project">
+              View List of Project
+            </NavLink>
           </div>
         </Fragment>
       </ul>

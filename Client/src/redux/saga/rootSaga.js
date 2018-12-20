@@ -37,6 +37,13 @@ export const getConsultantOfProjectSuccess = data => {
   };
 };
 
+export const getProjectOfConsultantSuccess = data => {
+  return {
+    type: "GET_PROJECT_OF_CONSULTANT_SUCCESS",
+    data
+  };
+};
+
 export function* authenticateRequest(action) {
   try {
     const res = yield call(axios, {
@@ -86,6 +93,11 @@ export function* getConsultantOfProjectRequest(action) {
   yield put(getConsultantOfProjectSuccess(res.data));
 }
 
+export function* getProjectOfConsultantRequest(action) {
+  const res = yield call(axios.get, `/project?id_consultant=${action.id}`);
+  yield put(getProjectOfConsultantSuccess(res.data));
+}
+
 export default function* rootSaga() {
   yield takeEvery("VALID_ABSENCE_REQUEST", validOneAbsence);
   yield takeLatest("REFUS_ABSENCE_REQUEST", refusOneAbsence);
@@ -95,4 +107,5 @@ export default function* rootSaga() {
   yield takeEvery("ADD_PROJECT_REQUEST", addProjectRequest);
   yield takeEvery("GET_PROJECT_REQUEST", getProjectRequest);
   yield takeEvery("GET_CONSULTANT_OF_PROJECT", getConsultantOfProjectRequest);
+  yield takeEvery("GET_PROJECT_OF_CONSULTANT", getProjectOfConsultantRequest);
 }

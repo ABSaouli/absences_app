@@ -13,6 +13,7 @@ import EstimationAbsence from "./component/EstimationAbsence";
 import AddProjet from "./component/AddProjet";
 import ProjectList from "./component/ProjectList";
 import DetailProject from "./component/DetailProject";
+import ListProjectConsultant from "./component/ListProjectConsultant";
 
 export default function AbsenceApp() {
   return (
@@ -37,6 +38,7 @@ export default function AbsenceApp() {
           <Route exact path="/add-absence" component={AddAbsence} />
           <Route exact path="/all-project" component={ProjectList} />
           <Route exact path="/detail-project/:id" component={DetailProject} />
+          <Route exact path="/list-project" component={ListProjectConsultant} />
         </Switch>
       </div>
     </BrowserRouter>

@@ -17,3 +17,10 @@ export const getConsultantOfProject = id => {
     id
   };
 };
+
+export const getProjectOfConsultant = id => {
+  return {
+    type: "GET_PROJECT_OF_CONSULTANT",
+    id
+  };
+};
