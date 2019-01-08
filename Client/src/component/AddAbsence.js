@@ -61,7 +61,7 @@ class AddAbsence extends Component {
                 type="date"
                 id="start"
                 min="2018-01-01"
-                max="2018-12-31"
+                max="2019-12-31"
                 className="form-control"
                 name="dateDebut"
                 value={dateDebut}
@@ -74,7 +74,7 @@ class AddAbsence extends Component {
                 type="date"
                 id="start"
                 min="2018-01-01"
-                max="2018-12-31"
+                max="2019-12-31"
                 className="form-control"
                 name="dateFin"
                 value={dateFin}

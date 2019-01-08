@@ -1,6 +1,7 @@
 import axios from "axios";
 import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
 import { loginSuccess, registerUser, loginFailure } from "../actions/login";
+import { editeResponsableRequest } from "./absenceSaga";
 
 export const validAbsenceSuccess = id => {
   return {
@@ -98,6 +99,14 @@ export function* getProjectOfConsultantRequest(action) {
   yield put(getProjectOfConsultantSuccess(res.data));
 }
 
+export function* editeConsultantRequest(action) {
+  yield call(
+    axios.put,
+    `/consultant/${action.consultant.idconsultant}`,
+    action.consultant
+  );
+}
+
 export default function* rootSaga() {
   yield takeEvery("VALID_ABSENCE_REQUEST", validOneAbsence);
   yield takeLatest("REFUS_ABSENCE_REQUEST", refusOneAbsence);
@@ -108,4 +117,6 @@ export default function* rootSaga() {
   yield takeEvery("GET_PROJECT_REQUEST", getProjectRequest);
   yield takeEvery("GET_CONSULTANT_OF_PROJECT", getConsultantOfProjectRequest);
   yield takeEvery("GET_PROJECT_OF_CONSULTANT", getProjectOfConsultantRequest);
+  yield takeEvery("EDITE_CONSULTANT_REQUEST", editeConsultantRequest);
+  yield takeEvery("EDITE_RESPONSABLE_REQUEST", editeResponsableRequest);
 }

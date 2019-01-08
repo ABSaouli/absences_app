@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import Absence from "./Absence";
 import { getIdConsultant, getEstimationConge } from "../redux/actions/absence";
+import { getRapportActivite } from "../redux/actions/rapportActivite";
 
 class AbsenceList extends React.Component {
   state = {
@@ -28,7 +29,11 @@ class AbsenceList extends React.Component {
             </div>
           </Fragment>
         ) : (
-          <h4>Consultant Profile : {user}</h4>
+          <h4>
+            <NavLink className="float-right" to="/edite-profil">
+              Consultant Profile :{user}
+            </NavLink>
+          </h4>
         )}
         <Fragment>
           <h3>Requested Absence Tables </h3>
@@ -38,6 +43,21 @@ class AbsenceList extends React.Component {
               className="float-right"
               to="/estimation-absence"
               onClick={() => this.props.getEstimationConge(idconsultant)}
+            >
+              Let's Go
+            </NavLink>{" "}
+          </h5>
+          <h5>
+            <NavLink className="float-right" to="/add-rib">
+              Ajouter un RIB
+            </NavLink>{" "}
+          </h5>
+          <h5>
+            Rpport D'activités
+            <NavLink
+              className="float-right"
+              to="/rapport-activite"
+              onClick={() => this.props.getRapportActivite}
             >
               Let's Go
             </NavLink>{" "}
@@ -90,5 +110,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getIdConsultant, getEstimationConge }
+  { getIdConsultant, getEstimationConge, getRapportActivite }
 )(AbsenceList);

@@ -8,13 +8,13 @@ const register = (
         return {
           isRegist: true,
           idUser: action.user._id,
-          user: "",
+          user: action.user,
           isRedirect: true
         };
       } else {
         return {
           isRegist: true,
-          idUser: action.id,
+          idUser: action.user._id,
           user: action.user,
           isRedirect: false
         };

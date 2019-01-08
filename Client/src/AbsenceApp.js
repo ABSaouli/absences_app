@@ -14,6 +14,9 @@ import AddProjet from "./component/AddProjet";
 import ProjectList from "./component/ProjectList";
 import DetailProject from "./component/DetailProject";
 import ListProjectConsultant from "./component/ListProjectConsultant";
+import EditeConsultant from "./component/EditeConsultant";
+import AddRib from "./component/AddRib";
+import RapportActivite from "./component/RapportActivite";
 
 export default function AbsenceApp() {
   return (
@@ -25,11 +28,14 @@ export default function AbsenceApp() {
           <Route exact path="/login" component={Login} />
           <Route exact path="/new-user" component={NewUser} />
           <Route exact path="/add-consultant" component={AddConsultant} />
+          <Route exact path="/edite-profil" component={EditeConsultant} />
           <Route exact path="/add-responsable" component={AddResponsable} />
           <Route exact path="/absences" component={AbsenceList} />
           <Route exact path="/valid-absences" component={ValidAbsences} />
           <Route exact path="/consultant-list" component={ConsultantList} />
           <Route exact path="/add-project" component={AddProjet} />
+          <Route exact path="/add-rib" component={AddRib} />
+          <Route exact path="/rapport-activite" component={RapportActivite} />
           <Route
             exact
             path="/estimation-absence"

@@ -1,8 +1,19 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
+import Axios from "axios";
 
 class AbsenceList extends React.Component {
+  uploadeRib = id => {
+    console.log("objet res of get rib ");
+    Axios.get(`/consultant/rib/${id}`)
+      .then(res => {
+        console.log("objet res of get rib ", res);
+      })
+      .catch(err => {
+        console.log("error of methode get bir ", err);
+      });
+  };
   render() {
     const { consultants, user } = this.props;
     return (
@@ -27,7 +38,18 @@ class AbsenceList extends React.Component {
                     <td>{consultant.name}</td>
                     <td>{consultant.surname}</td>
                     <td>{consultant.mail} </td>
-                    <td>{consultant.age}</td>
+                    <td>
+                      <button
+                        type="button"
+                        className="btn-primary"
+                        onClick={() => this.uploadeRib(consultant._id)}
+                      >
+                        <span
+                          class="glyphicon glyphicon-eye-open"
+                          aria-hidden="true"
+                        />
+                      </button>
+                    </td>
                     <td>{consultant.dateDebutContart}</td>
                   </tr>
                 ))

@@ -30,7 +30,11 @@ class ValidAbsenceList extends React.Component {
             </div>
           </Fragment>
         ) : (
-          <h4>Profil de Responsable : {user}</h4>
+          <h4>
+            <NavLink className="float-right" to="/edite-profil">
+              Profile Of Responsable :{user}
+            </NavLink>
+          </h4>
         )}
         <Fragment>
           <h3>Demandes de congé a valider </h3>
