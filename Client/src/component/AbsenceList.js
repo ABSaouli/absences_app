@@ -57,7 +57,7 @@ class AbsenceList extends React.Component {
             <NavLink
               className="float-right"
               to="/rapport-activite"
-              onClick={() => this.props.getRapportActivite}
+              onClick={() => this.props.getRapportActivite()}
             >
               Let's Go
             </NavLink>{" "}

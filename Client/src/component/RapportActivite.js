@@ -1,21 +1,40 @@
 import React from "react";
 import { ListGroup, ListGroupItem } from "reactstrap";
+import { connect } from "react-redux";
+import moment from "moment";
+import { getActiviteId } from "../redux/actions/rapportActivite";
 
 class RapportActivite extends React.Component {
   render() {
+    const { rapportActivite } = this.props;
     return (
-      <ListGroup>
-        <ListGroupItem>Janvier, 2019</ListGroupItem>
-        <ListGroupItem>Décember, 2018</ListGroupItem>
-        <ListGroupItem>Nouvember, 2018</ListGroupItem>
-        <ListGroupItem>October, 2018</ListGroupItem>
-        <ListGroupItem>September, 2018</ListGroupItem>
-        <ListGroupItem>Aout, 2018</ListGroupItem>
-        <ListGroupItem>Juillet, 2018</ListGroupItem>
-        <ListGroupItem>Juin, 2018</ListGroupItem>
-      </ListGroup>
+      <ul>
+        <ListGroup>
+          {rapportActivite.map(rapActivite => (
+            <ListGroupItem
+              tag="button"
+              action
+              onClick={() => this.props.getActiviteId(rapActivite._id)}
+            >
+              {" "}
+              {moment(rapActivite.date)
+                .locale("fr")
+                .format("MMMM, YYYY")}
+            </ListGroupItem>
+          ))}
+        </ListGroup>
+      </ul>
     );
   }
 }
 
-export default RapportActivite;
+const mapStateToProps = state => {
+  return {
+    rapportActivite: state.rapportActivite
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { getActiviteId }
+)(RapportActivite);
