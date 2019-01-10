@@ -1,12 +1,16 @@
 const express = require("express");
 const session = require("express-session");
-const bodyparser = require("body-parser");
+const bodyParser = require("body-parser");
 const cookies = require("cookie-parser");
+const fileUpload = require("express-fileupload");
+const http = require("https");
 
 const App = express();
 
-App.use(bodyparser.urlencoded({ extended: true }));
+App.use(fileUpload());
 
+App.use(bodyParser.urlencoded({ extended: true }));
+App.use(bodyParser.json());
 App.use(cookies());
 
 App.use(

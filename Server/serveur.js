@@ -16,7 +16,7 @@ App.post("/login", function(req, res, next) {
       return next(err);
     }
     if (!user) {
-      return res.status(201).json({ error: "User not found." });
+      return res.status(401).json({ error: "User not found." });
     }
     req.session.save(err => {
       if (err) {
