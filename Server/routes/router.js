@@ -441,4 +441,27 @@ Router.post("/activite", (req, res) => {
     res.status(200).json(rapportActivite);
   });
 });
+Router.post("/activite", (req, res) => {
+  if (req.body.paylod === undefined) {
+    res.status(404).send("le body est vide");
+    return;
+  }
+
+  req.body.paylod.forEach(activiteJour => {
+    let activite = new schemadb.activite({
+      date: activiteJour.paylod.date,
+      heureDebut: activiteJour.paylod.heureDebut,
+      nbHeures: activiteJour.paylod.nbHeures,
+      type: activiteJour.paylod.type,
+      rapportActiviteId: activiteJour.idRapport
+    });
+
+    activite.save(err => {
+      if (err) {
+        return res.status(500).json({ error: "error serveur " });
+      }
+    });
+  });
+  res.status(304).send("save avtivate succsuss");
+});
 module.exports = Router;

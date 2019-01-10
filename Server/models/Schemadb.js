@@ -68,10 +68,10 @@ let rapportActiviteSchema = Schema({
 
 let activiteSchema = Schema({
   _id: Schema.Types.ObjectId,
-  jour: Date,
-  demiJour: Boolean,
-  typeJour: String,
-  discriptif: String,
+  date: Date,
+  heureDebut: String,
+  nbHeures: Number,
+  type: String,
   rapportActiviteId: { type: Schema.Types.ObjectId, ref: "rapportActivite" }
 });
 
