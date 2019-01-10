@@ -2,7 +2,7 @@ import axios from "axios";
 import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
 import { loginSuccess, registerUser, loginFailure } from "../actions/login";
 import { editeResponsableRequest } from "./absenceSaga";
-import { getRapportActiviteRequest } from "./activiteSaga";
+import { getRapportActiviteRequest, enregisterRequest } from "./activiteSaga";
 
 export const validAbsenceSuccess = id => {
   return {
@@ -121,5 +121,5 @@ export default function* rootSaga() {
   yield takeEvery("EDITE_CONSULTANT_REQUEST", editeConsultantRequest);
   yield takeEvery("EDITE_RESPONSABLE_REQUEST", editeResponsableRequest);
   yield takeEvery("GET_RAPPORT_ACTIVITE_REQUEST", getRapportActiviteRequest);
-  yield takeEvery("GET_ACTIVITE_REQUEST", getRapportActiviteRequest);
+  yield takeEvery("ENREGISTER_ACTIVITE", enregisterRequest);
 }

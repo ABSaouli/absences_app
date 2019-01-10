@@ -10,15 +10,22 @@ export const getRapportActiviteSuccess = rapportActivite => {
   };
 };
 
-export const getActiviteId = id => {
+export const getActivite = activiteMounth => {
   return {
-    type: "GET_ACTIVITE_REQUEST",
-    id
+    type: "GET_ACTIVITE_MOUNTH",
+    activiteMounth
   };
 };
 export const getActiviteIdSuccess = rapportActivite => {
   return {
     type: "GET_ACTIVITE_SUCCESS",
     rapportActivite
+  };
+};
+
+export const enregister = activites => {
+  return {
+    type: "ENREGISTER_ACTIVITE",
+    activites
   };
 };
