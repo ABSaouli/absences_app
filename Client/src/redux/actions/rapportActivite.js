@@ -10,16 +10,24 @@ export const getRapportActiviteSuccess = rapportActivite => {
   };
 };
 
-export const getActivite = activiteMounth => {
+export const getActivite = rapportActiviteId => {
   return {
     type: "GET_ACTIVITE_MOUNTH",
+    rapportActiviteId
+  };
+};
+
+export const fixRapportActiviteId = activiteMounth => {
+  return {
+    type: "GET_ACTIVITE_MOUNTH_ID",
     activiteMounth
   };
 };
-export const getActiviteIdSuccess = rapportActivite => {
+
+export const getActiviteIdSuccess = activites => {
   return {
     type: "GET_ACTIVITE_SUCCESS",
-    rapportActivite
+    activites
   };
 };
 

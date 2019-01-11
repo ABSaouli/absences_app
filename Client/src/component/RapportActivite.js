@@ -1,11 +1,14 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { ListGroup, ListGroupItem } from "reactstrap";
-import { Redirect, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import moment from "moment";
-import { getActivite } from "../redux/actions/rapportActivite";
+import {
+  fixRapportActiviteId,
+  getActivite
+} from "../redux/actions/rapportActivite";
 
-class RapportActivite extends React.Component {
+class RapportActivite extends Component {
   render() {
     const { rapportActivite } = this.props;
     return (
@@ -15,7 +18,10 @@ class RapportActivite extends React.Component {
             <ListGroupItem tag="a" action>
               <NavLink
                 to={`/rapport-activite/${rapActivite._id}`}
-                onClick={() => this.props.getActivite(rapActivite)}
+                onClick={() => {
+                  this.props.fixRapportActiviteId(rapActivite);
+                  this.props.getActivite(rapActivite._id);
+                }}
               >
                 {moment(rapActivite.date)
                   .locale("fr")
@@ -37,5 +43,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getActivite }
+  { fixRapportActiviteId, getActivite }
 )(RapportActivite);

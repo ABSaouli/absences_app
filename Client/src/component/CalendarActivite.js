@@ -1,5 +1,5 @@
 import dateFns from "date-fns";
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { Button } from "reactstrap";
 import { connect } from "react-redux";
 import moment from "moment";
@@ -15,6 +15,18 @@ class CalendarActivite extends Component {
     styleAllClick: [],
     activiteJours: []
   };
+  componentDidMount = () => {
+    debugger;
+    this.setState({
+      activiteJours: this.props.activates
+    });
+  };
+
+  // static getDeriveStateFromProps = (nextProps, prevState) => {
+  //   return {
+  //     activiteJours: this.props.activates
+  //   };
+  // };
 
   renderMonthName() {
     const dateFormat = "MMMM YYYY";
@@ -23,15 +35,15 @@ class CalendarActivite extends Component {
     return (
       <div className="header row flex-middle">
         <div className="col col-center">
+          <Button color="secondary" size="sm" onClick={() => this.gauche()}>
+            gauche
+          </Button>{" "}
           <span>
             {dateFns.format(monthActive.date, dateFormat)}
             {moment(this.state.currentMonth)
               .locale("fr")
               .format(dateFormat)}
           </span>
-          <Button color="secondary" size="sm" onClick={() => this.gauche()}>
-            gauche
-          </Button>{" "}
           <Button color="secondary" size="sm" onClick={() => this.droite()}>
             droite
           </Button>{" "}
@@ -43,7 +55,6 @@ class CalendarActivite extends Component {
   renderJounName() {
     const dateFormat = "dddd";
     const monthActive = this.props.activateMounth;
-    // ledebut de semain pour cette date
     let dateDebutSemaineOfDebutMois = dateFns.startOfWeek(
       this.state.currentMonth
     );
@@ -62,11 +73,8 @@ class CalendarActivite extends Component {
   renderJours() {
     const monthActive = this.props.activateMounth.date;
     const { currentMonth, activiteJours } = this.state;
-    // le debut de mois pour cette date
     const dateDebutMois = dateFns.startOfMonth(currentMonth);
-    //la fin de mois pour cette date
     const dateFinMois = dateFns.endOfMonth(dateDebutMois);
-    // le debut de mois pour cette date
     const dateDebutSemaineOfDebutMois = dateFns.startOfWeek(dateDebutMois);
     const finSemaineMois = dateFns.endOfWeek(dateFinMois);
 
@@ -313,7 +321,8 @@ class CalendarActivite extends Component {
 
 const mapStateToProps = state => {
   return {
-    activateMounth: state.rapportActivite.activateMounth
+    activateMounth: state.rapportActivite.activateMounth,
+    activates: state.rapportActivite.activites
   };
 };
 

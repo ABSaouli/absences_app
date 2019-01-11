@@ -10,6 +10,15 @@ export function* getRapportActiviteRequest(action) {
   yield put(getRapportActiviteSuccess(res.data));
 }
 
+export function* getActiviteRequest(action) {
+  const res = yield call(
+    axios.get,
+    `/activite?rapportActiviteId=${action.rapportActiviteId}`
+  );
+  debugger;
+  yield put(getActiviteIdSuccess(res.data));
+}
+
 export function* enregisterRequest(action) {
   try {
     yield call(axios.post, "/activite", action.activites);
