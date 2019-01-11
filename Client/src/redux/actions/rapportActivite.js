@@ -1,39 +1,40 @@
-export const getRapportActivite = () => {
+export const getRapportActivities = () => {
   return {
-    type: "GET_RAPPORT_ACTIVITE_REQUEST"
-  };
-};
-export const getRapportActiviteSuccess = rapportActivite => {
-  return {
-    type: "GET_RAPPORT_ACTIVITE_SUCCESS",
-    rapportActivite
+    type: "GET_RAPPORT_ACTIVITIES_REQUEST"
   };
 };
 
-export const getActivite = rapportActiviteId => {
+export const getRapportActivitiesSuccess = rapportActivities => {
   return {
-    type: "GET_ACTIVITE_MOUNTH",
+    type: "GET_RAPPORT_ACTIVITIES_SUCCESS",
+    rapportActivities
+  };
+};
+
+export const getActivities = rapportActiviteId => {
+  return {
+    type: "GET_ACTIVITIES",
     rapportActiviteId
   };
 };
 
-export const fixRapportActiviteId = activiteMounth => {
+export const fixedRapportActivities = currentRapportActivity => {
   return {
-    type: "GET_ACTIVITE_MOUNTH_ID",
-    activiteMounth
+    type: "GET_CURRENT_ACTIVITY",
+    currentRapportActivity
   };
 };
 
-export const getActiviteIdSuccess = activites => {
+export const getActiviteIdSuccess = activities => {
   return {
-    type: "GET_ACTIVITE_SUCCESS",
-    activites
+    type: "GET_ACTIVITIES_SUCCESS",
+    activities
   };
 };
 
-export const enregister = activites => {
+export const enregister = activities => {
   return {
-    type: "ENREGISTER_ACTIVITE",
-    activites
+    type: "ENREGISTER_ACTIVITIES",
+    activities
   };
 };

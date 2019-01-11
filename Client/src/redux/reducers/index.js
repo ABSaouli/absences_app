@@ -6,7 +6,7 @@ import consultants from "./consultants/consultant";
 import visibilityAbsence from "./absences/visibilityAbsence";
 import Estimation from "./estimationAbsence/estimation";
 import Project from "./project/project";
-import rapportActivite from "./rapportActivite/rapportActivite";
+import rapportActivitiesReducer from "./rapportActivitiesReducer/rapportActivitiesReducer";
 
 const absenceReducer = combineReducers({
   register: register,
@@ -16,7 +16,7 @@ const absenceReducer = combineReducers({
   estimation: Estimation,
   project: Project,
   visibilityAbsence: visibilityAbsence,
-  rapportActivite: rapportActivite
+  rapportActivitiesReducer: rapportActivitiesReducer
 });
 
 export default absenceReducer;

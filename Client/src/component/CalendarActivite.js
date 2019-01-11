@@ -2,6 +2,7 @@ import dateFns from "date-fns";
 import React, { Component } from "react";
 import { Button } from "reactstrap";
 import { connect } from "react-redux";
+import { ListGroup, ListGroupItem } from "reactstrap";
 import moment from "moment";
 import { configueMoment } from "../configueMoment";
 import { enregister } from "../redux/actions/rapportActivite";
@@ -9,28 +10,46 @@ import { enregister } from "../redux/actions/rapportActivite";
 class CalendarActivite extends Component {
   state = {
     currentMonth: new Date(),
-    selectedDate: new Date(),
     styleJourClick: "",
     buttonSelected: "NORMALE",
     styleAllClick: [],
-    activiteJours: []
+    activities: []
   };
+
+  static getDeriveStateFromProps = (Props, State) => {
+    if (this.State.activities !== this.Props.activities) {
+      return {
+        activities: [...this.Props.activities]
+      };
+    }
+
+    return null;
+  };
+
   componentDidMount = () => {
-    debugger;
     this.setState({
-      activiteJours: this.props.activates
+      activities: this.props.activities
     });
   };
 
-  // static getDeriveStateFromProps = (nextProps, prevState) => {
-  //   return {
-  //     activiteJours: this.props.activates
-  //   };
-  // };
+  shouldComponentUpdate = (nextProps, nextState) => {
+    if (this.state.activities !== nextProps.activities) {
+      return true;
+    }
+    return false;
+  };
+
+  componentDidUpdate = prevProps => {
+    if (this.props.activities !== prevProps.activities) {
+      this.setState({
+        activities: this.props.activities
+      });
+    }
+  };
 
   renderMonthName() {
     const dateFormat = "MMMM YYYY";
-    const monthActive = this.props.activateMounth;
+    const monthActive = this.props.rapportActivity;
 
     return (
       <div className="header row flex-middle">
@@ -52,9 +71,29 @@ class CalendarActivite extends Component {
     );
   }
 
+  projectOfConsultant() {
+    return (
+      <div>
+        <div id="list-project">
+          <h2>List des Projets </h2>
+        </div>
+        <ListGroup id="list-project">
+          {this.props.projectOfConsultant &&
+          this.props.projectOfConsultant.length ? (
+            this.props.projectOfConsultant.map(project => (
+              <ListGroupItem key={project._id}>{project.title}</ListGroupItem>
+            ))
+          ) : (
+            <ListGroupItem> Zsoft Consulting</ListGroupItem>
+          )}
+        </ListGroup>
+      </div>
+    );
+  }
+
   renderJounName() {
     const dateFormat = "dddd";
-    const monthActive = this.props.activateMounth;
+    const monthActive = this.props.rapportActivity;
     let dateDebutSemaineOfDebutMois = dateFns.startOfWeek(
       this.state.currentMonth
     );
@@ -71,8 +110,8 @@ class CalendarActivite extends Component {
   }
 
   renderJours() {
-    const monthActive = this.props.activateMounth.date;
-    const { currentMonth, activiteJours } = this.state;
+    const monthActive = this.props.rapportActivity.date;
+    const { currentMonth, activities } = this.state;
     const dateDebutMois = dateFns.startOfMonth(currentMonth);
     const dateFinMois = dateFns.endOfMonth(dateDebutMois);
     const dateDebutSemaineOfDebutMois = dateFns.startOfWeek(dateDebutMois);
@@ -97,7 +136,7 @@ class CalendarActivite extends Component {
           type: ""
         };
         arrayDay.push(objetDay);
-        let arrayVerifier = activiteJours.map(jour => jour.date);
+        let arrayVerifier = activities.map(jour => jour.date);
         let index = arrayVerifier.indexOf(objetDay.date);
         index === -1
           ? days.push(
@@ -118,10 +157,10 @@ class CalendarActivite extends Component {
                 className={`col cell ${
                   !dateFns.isSameMonth(day, dateDebutMois)
                     ? "disabled"
-                    : activiteJours[index].type
+                    : activities[index].type
                 }`}
-                key={activiteJours[index]}
-                onClick={this.jourClick(activiteJours[index])}
+                key={activities[index]}
+                onClick={this.jourClick(activities[index])}
               >
                 <span className="number">{formattedDate}</span>
               </div>
@@ -141,6 +180,7 @@ class CalendarActivite extends Component {
 
     return <div className="body">{rows}</div>;
   }
+
   jourClick = jour => () => {
     let editeJour;
     jour.nbHeures === 0
@@ -171,18 +211,16 @@ class CalendarActivite extends Component {
           heureDebut: ""
         });
 
-    if (this.state.activiteJours.length > 0) {
-      let array = this.state.activiteJours.filter(
-        obj => obj.date !== jour.date
-      );
+    if (this.state.activities.length > 0) {
+      let array = this.state.activities.filter(obj => obj.date !== jour.date);
 
       this.setState({
-        activiteJours: [...array, editeJour]
+        activities: [...array, editeJour]
       });
     } else {
       this.setState({
-        activiteJours: [
-          ...this.state.activiteJours,
+        activities: [
+          ...this.state.activities,
           {
             ...jour,
             type: this.state.buttonSelected,
@@ -221,7 +259,7 @@ class CalendarActivite extends Component {
   };
   selectToutClick = () => {
     // this.setState({
-    //   activiteJours: this.state.styleJourClick.map(
+    //   activities: this.state.styleJourClick.map(
     //     obj => (obj.type = this.state.buttonSelected)
     //   )
     // });
@@ -234,8 +272,8 @@ class CalendarActivite extends Component {
   };
 
   render() {
-    const activateMounth = this.props.activateMounth;
-    const { activiteJours } = this.state;
+    const { rapportActivity } = this.props;
+    const { activities } = this.state;
 
     return (
       <>
@@ -249,9 +287,13 @@ class CalendarActivite extends Component {
                   .format("MMMM YYYY")}
               </span>
             </div>
+            <div id="mail">
+              <span>{this.props.mail}</span>
+            </div>
           </header>
 
           <main>
+            <dir className="list-project">{this.projectOfConsultant()}</dir>
             <div>
               <Button
                 outline
@@ -305,8 +347,8 @@ class CalendarActivite extends Component {
               size="sm"
               onClick={() =>
                 this.props.enregister({
-                  paylod: activiteJours,
-                  idRapport: activateMounth._id
+                  paylod: activities,
+                  idRapport: rapportActivity._id
                 })
               }
             >
@@ -321,8 +363,12 @@ class CalendarActivite extends Component {
 
 const mapStateToProps = state => {
   return {
-    activateMounth: state.rapportActivite.activateMounth,
-    activates: state.rapportActivite.activites
+    rapportActivity:
+      state.rapportActivitiesReducer.currentRapportActivity.rapportActivity,
+    activities:
+      state.rapportActivitiesReducer.currentRapportActivity.activities,
+    projectOfConsultant: state.project.projectOfConsultant,
+    mail: state.register.user.mail
   };
 };
 

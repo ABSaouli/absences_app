@@ -4,23 +4,23 @@ import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import moment from "moment";
 import {
-  fixRapportActiviteId,
-  getActivite
+  fixedRapportActivities,
+  getActivities
 } from "../redux/actions/rapportActivite";
 
 class RapportActivite extends Component {
   render() {
-    const { rapportActivite } = this.props;
+    const { rapportActivities } = this.props;
     return (
       <ul>
         <ListGroup>
-          {rapportActivite.map(rapActivite => (
+          {rapportActivities.map(rapActivite => (
             <ListGroupItem tag="a" action>
               <NavLink
                 to={`/rapport-activite/${rapActivite._id}`}
                 onClick={() => {
-                  this.props.fixRapportActiviteId(rapActivite);
-                  this.props.getActivite(rapActivite._id);
+                  this.props.fixedRapportActivities(rapActivite);
+                  this.props.getActivities(rapActivite._id);
                 }}
               >
                 {moment(rapActivite.date)
@@ -37,11 +37,12 @@ class RapportActivite extends Component {
 
 const mapStateToProps = state => {
   return {
-    rapportActivite: state.rapportActivite.activateAll
+    rapportActivities:
+      state.rapportActivitiesReducer.rapportActivitie.rapportActivities
   };
 };
 
 export default connect(
   mapStateToProps,
-  { fixRapportActiviteId, getActivite }
+  { fixedRapportActivities, getActivities }
 )(RapportActivite);

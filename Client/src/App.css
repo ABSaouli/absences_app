@@ -48,12 +48,25 @@ header {
   border-bottom: 1px solid var(--border-color);
   background: var(--neutral-color);
 }
+#list-project {
+  font-size: 175%;
+  text-align: center;
+  color: rgb(65, 62, 62);
+  line-height: 1;
+}
 
 header #logo {
   font-size: 175%;
   text-align: center;
   color: var(--main-color);
   line-height: 1;
+}
+
+header #mail {
+  font-size: 140%;
+  text-align: center;
+  color: var(--main-color);
+  line-height: 2;
 }
 
 header #logo .icon {
@@ -166,7 +179,7 @@ main {
 
 .calendar .body .NORMALE {
   border-left: 10px solid transparent;
-  border-image: linear-gradient(45deg, #1a8fff 0%, #53cbf1 40%);
+  border-image: linear-gradient(45deg, #0a8606 0%, #12c430 40%);
   border-image-slice: 1;
 }
 

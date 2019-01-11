@@ -3,9 +3,9 @@ import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
 import { loginSuccess, registerUser, loginFailure } from "../actions/login";
 import { editeResponsableRequest } from "./absenceSaga";
 import {
-  getRapportActiviteRequest,
+  getRapportActivitiesRequest,
   enregisterRequest,
-  getActiviteRequest
+  getActivitiesRequest
 } from "./activiteSaga";
 
 export const validAbsenceSuccess = id => {
@@ -124,7 +124,10 @@ export default function* rootSaga() {
   yield takeEvery("GET_PROJECT_OF_CONSULTANT", getProjectOfConsultantRequest);
   yield takeEvery("EDITE_CONSULTANT_REQUEST", editeConsultantRequest);
   yield takeEvery("EDITE_RESPONSABLE_REQUEST", editeResponsableRequest);
-  yield takeEvery("GET_RAPPORT_ACTIVITE_REQUEST", getRapportActiviteRequest);
-  yield takeEvery("ENREGISTER_ACTIVITE", enregisterRequest);
-  yield takeEvery("GET_ACTIVITE_MOUNTH", getActiviteRequest);
+  yield takeEvery(
+    "GET_RAPPORT_ACTIVITIES_REQUEST",
+    getRapportActivitiesRequest
+  );
+  yield takeEvery("ENREGISTER_ACTIVITIES", enregisterRequest);
+  yield takeEvery("GET_ACTIVITIES", getActivitiesRequest);
 }
